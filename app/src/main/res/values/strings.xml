@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">Instagram</string>
+    <string name="login_user">Número de telefone, email ou nome de usuário</string>
+    <string name="login_password">Senha</string>
+    <string name="enter">Entrar</string>
+    <string name="or">Ou</string>
+    <string name="login_register">Não tem uma conta? <b><font color="#000000">Cadastre-se.</font></b></string>
+</resources>
