@@ -2,6 +2,8 @@ package co.pvitor.instagram.view.login
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.text.Editable
 import android.text.TextWatcher
 import co.pvitor.instagram.R
@@ -11,6 +13,7 @@ import com.google.android.material.textfield.TextInputEditText
 class LoginActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityLoginBinding
+    private lateinit var loadingButton: LoadingButton
     
     override fun onCreate(savedInstanceState: Bundle?) {
 
@@ -24,6 +27,16 @@ class LoginActivity : AppCompatActivity() {
         val textInputEditTextPassword: TextInputEditText = binding.textInputEditTextPassword
         textInputEditTextPassword.addTextChangedListener(watcher)
 
+        loadingButton = binding.loadingButtonLogin
+        loadingButton.setOnClickListener {
+            loadingButton.showProgress(true)
+
+            Handler(Looper.getMainLooper()).postDelayed({
+                textInputEditTextLogin.error = "Inválid User"
+                loadingButton.showProgress(false)
+            }, 3000)
+        }
+
         setContentView(binding.root)
     }
 
@@ -32,7 +45,7 @@ class LoginActivity : AppCompatActivity() {
         }
 
         override fun onTextChanged(c: CharSequence?, p1: Int, p2: Int, p3: Int) {
-            binding.buttonLogin.isEnabled = c.toString().isNotEmpty()
+            loadingButton.isEnabled = c.toString().isNotEmpty()
         }
 
         override fun afterTextChanged(p0: Editable?) {

@@ -58,11 +58,12 @@
                 />
             </com.google.android.material.textfield.TextInputLayout>
 
-            <Button
-                android:id="@+id/button_login"
+            <co.pvitor.instagram.view.login.LoadingButton
+                android:id="@+id/loading_button_login"
                 android:text="@string/enter"
-                android:enabled="false"
-                style="@style/Theme.Instagram.Button"
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                app:text="@string/enter"
             />
 
             <FrameLayout
