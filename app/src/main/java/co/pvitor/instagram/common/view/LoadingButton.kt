@@ -1,4 +1,4 @@
-package co.pvitor.instagram.view.login
+package co.pvitor.instagram.common.view
 
 import android.content.Context
 import android.content.res.TypedArray
@@ -37,7 +37,7 @@ class LoadingButton: FrameLayout {
         text = typedArray.getString(R.styleable.LoadingButton_text)
 
         button = getChildAt(0) as Button
-        button.isEnabled = false
+        button.isEnabled = typedArray.getBoolean(R.styleable.LoadingButton_enabled, false)
         button.text = text
 
         progressBar = getChildAt(1) as ProgressBar

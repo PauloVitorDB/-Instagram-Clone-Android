@@ -38,7 +38,7 @@
 
             </com.google.android.material.textfield.TextInputLayout>
 
-            <co.pvitor.instagram.view.login.LoadingButton
+            <co.pvitor.instagram.common.view.LoadingButton
                 app:text="@string/next"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -61,7 +61,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textAlignment="center"
-        android:padding="24dp"
+        android:padding="@dimen/text_item_padding"
         android:background="@color/white"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

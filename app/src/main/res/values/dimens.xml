@@ -1,6 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <dimen name="activity_horizontal_margin_small">36dp</dimen>
+    <dimen name="activity_horizontal_margin_medium">52dp</dimen>
     <dimen name="view_small_spacing">16dp</dimen>
-    <dimen name="view_medium_spacing">48dp</dimen>
+    <dimen name="view_medium_spacing">38dp</dimen>
+    <dimen name="text_item_padding">24dp</dimen>
+    <dimen name="subtitle_horizontal_padding">24dp</dimen>
+    <dimen name="custom_dialog_horizontal_item_padding">30</dimen>
+    <dimen name="custom_dialog_vertical_item_spacing">50</dimen>
 </resources>

@@ -10,4 +10,16 @@
     <string name="complete_name">Nome completo</string>
     <string name="label_name_and_password">Nome e Senha</string>
     <string name="button_continue">Continuar</string>
+    <string name="register">Cadastre-se</string>
+    <string name="register_instagram_policy">Ao clicar em Cadastre-se, você concorda com nossos <font color="#000000"><b>Termos</b></font>, com a <font color="#000000"><b>Política de Dados</b></font> e com a <font color="#000000"><b>Política de Cookies</b></font>.</string>
+    <string name="confirm_registration">Cadastrar-se como\n$1%s?</string>
+    <string name="text_view_user_name_alter_info">Você poderá alterar seu nome de usuário depois.</string>
+    <string name="add_perfil_photo">Adicionar foto de perfil</string>
+    <string name="add_profile_photo">Adicionar foto de perfil</string>
+    <string name="add_profile_photo_subtitle">Adicione uma foto de perfil para que seus amigos saibam que e voce.</string>
+    <string name="btn_add_profile_photo">Adicionar uma foto</string>
+    <string name="skip_step">Pular</string>
+    <string name="define_photo">Definir uma foto de perfil</string>
+    <string name="galery">Galeria</string>
+    <string name="camera">Câmera</string>
 </resources>

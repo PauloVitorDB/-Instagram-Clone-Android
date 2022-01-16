@@ -6,7 +6,7 @@
     android:layout_height="wrap_content">
 
     <Button
-        style="@style/Theme.Instagram.Button"
+        style="@style/Theme.Instagram.Button.Form"
     />
 
     <ProgressBar

@@ -10,8 +10,8 @@
         android:id="@+id/fragment_register"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:name="co.pvitor.instagram.view.login.RegisterNamePasswordFragment"
-        tools:layout="@layout/fragment_register_name_password"
+        android:name="co.pvitor.instagram.view.login.RegisterPhotoFragment"
+        tools:layout="@layout/fragment_register_photo"
     />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

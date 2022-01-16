@@ -6,7 +6,7 @@ import android.os.Handler
 import android.os.Looper
 import android.text.Editable
 import android.text.TextWatcher
-import co.pvitor.instagram.R
+import co.pvitor.instagram.common.view.LoadingButton
 import co.pvitor.instagram.databinding.ActivityLoginBinding
 import com.google.android.material.textfield.TextInputEditText
 
