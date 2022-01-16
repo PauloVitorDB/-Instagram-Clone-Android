@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <TextView
+        android:id="@+id/text_view_confirm_registration"
+        android:text="@string/confirm_registration"
+        style="@style/Theme.Instagram.TextView.Title.Form"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/text_view_user_name_alter_info"
+    />
+
+    <TextView
+        android:id="@+id/text_view_user_name_alter_info"
+        android:text="@string/text_view_user_name_alter_info"
+        style="@style/Theme.Instagram.TextViewBase.Form"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/loading_button_register_confirm"
+    />
+
+    <co.pvitor.instagram.common.view.LoadingButton
+        android:id="@+id/loading_button_register_confirm"
+        app:text="@string/register"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+    />
+
+    <TextView
+        android:text="@string/register_instagram_policy"
+        style="@style/Theme.Instagram.TextViewBase"
+        android:padding="@dimen/text_item_padding"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+    />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
