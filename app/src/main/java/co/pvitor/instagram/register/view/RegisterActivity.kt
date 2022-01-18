@@ -1,4 +1,4 @@
-package co.pvitor.instagram.view.login
+package co.pvitor.instagram.register.view
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle

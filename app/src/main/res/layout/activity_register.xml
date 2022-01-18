@@ -4,13 +4,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".view.login.RegisterActivity">
+    tools:context=".register.view.RegisterActivity">
 
     <fragment
         android:id="@+id/fragment_register"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:name="co.pvitor.instagram.view.login.RegisterPhotoFragment"
+        android:name="co.pvitor.instagram.register.view.RegisterPhotoFragment"
         tools:layout="@layout/fragment_register_photo"
     />
 

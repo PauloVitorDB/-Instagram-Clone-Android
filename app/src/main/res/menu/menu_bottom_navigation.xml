@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/menu_bottom_home"
+        android:icon="@drawable/ic_insta_home"
+        android:title="@string/menu_home"
+    />
+
+    <item
+        android:id="@+id/menu_bottom_search"
+        android:icon="@drawable/ic_insta_search"
+        android:title="@string/menu_search"
+    />
+
+    <item
+        android:id="@+id/menu_bottom_add"
+        android:icon="@drawable/ic_insta_add"
+        android:title="@string/menu_add"
+    />
+
+    <item
+        android:id="@+id/menu_bottom_favorite"
+        android:icon="@drawable/ic_insta_heart"
+        android:title="@string/menu_fav"
+    />
+
+    <item
+        android:id="@+id/menu_bottom_profile"
+        android:icon="@drawable/ic_insta_profile"
+        android:title="@string/menu_profile"
+    />
+
+</menu>

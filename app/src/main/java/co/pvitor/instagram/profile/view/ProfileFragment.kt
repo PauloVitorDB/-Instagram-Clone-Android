@@ -1,4 +1,4 @@
-package co.pvitor.instagram.view.login
+package co.pvitor.instagram.profile.view
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -6,24 +6,25 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import co.pvitor.instagram.R
-import co.pvitor.instagram.databinding.FragmentRegisterConfirmBinding
+import co.pvitor.instagram.databinding.FragmentProfileBinding
 
-class RegisterConfirmFragment: Fragment() {
+class ProfileFragment: Fragment() {
 
-    private lateinit var binding: FragmentRegisterConfirmBinding
+    private lateinit var binding: FragmentProfileBinding
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        return inflater.inflate(R.layout.fragment_register_confirm, container, false)
+        return inflater.inflate(R.layout.fragment_profile, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        binding = FragmentRegisterConfirmBinding.bind(view)
-    }
 
+        super.onViewCreated(view, savedInstanceState)
+
+        binding = FragmentProfileBinding.bind(view)
+    }
 
 }
