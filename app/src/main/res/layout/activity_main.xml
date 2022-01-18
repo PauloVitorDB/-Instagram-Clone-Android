@@ -5,17 +5,41 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <fragment
-        android:id="@+id/main_fragment"
-        android:layout_height="0dp"
+
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
-        android:name="co.pvitor.instagram.profile.view.ProfileFragment"
-        tools:layout="@layout/fragment_profile"
-        app:layout_constraintStart_toEndOf="parent"
+        android:layout_height="0dp"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toTopOf="@id/bottom_navigation_view"
-    />
+    >
+
+        <com.google.android.material.appbar.AppBarLayout
+            android:backgroundTint="@color/white"
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_gravity="top"
+        >
+            <androidx.appcompat.widget.Toolbar
+                app:title="Instagram"
+                app:layout_scrollFlags="scroll|enterAlways"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:minHeight="?attr/actionBarSize"
+            />
+        </com.google.android.material.appbar.AppBarLayout>
+
+        <fragment
+            android:id="@+id/main_fragment"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior"
+            android:layout_height="match_parent"
+            android:layout_width="match_parent"
+            android:name="co.pvitor.instagram.profile.view.ProfileFragment"
+            tools:layout="@layout/fragment_profile"
+        />
+
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottom_navigation_view"

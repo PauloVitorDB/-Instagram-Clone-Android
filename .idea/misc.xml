@@ -6,6 +6,7 @@
         <entry key="../../../../layout/custom_preview.xml" value="0.17222222222222222" />
         <entry key="app/src/main/res/drawable/bc_button.xml" value="0.20677083333333332" />
         <entry key="app/src/main/res/drawable/bg_custom_dialog.xml" value="0.13125" />
+        <entry key="app/src/main/res/drawable/bg_profile_navigation.xml" value="0.20677083333333332" />
         <entry key="app/src/main/res/drawable/edit_text_background.xml" value="0.20677083333333332" />
         <entry key="app/src/main/res/drawable/ic_insta_add.xml" value="0.19444444444444445" />
         <entry key="app/src/main/res/drawable/ic_insta_heart.xml" value="0.19444444444444445" />
@@ -14,15 +15,16 @@
         <entry key="app/src/main/res/drawable/ic_insta_profile_thin.xml" value="0.1882051282051282" />
         <entry key="app/src/main/res/drawable/ic_insta_search.xml" value="0.19444444444444445" />
         <entry key="app/src/main/res/layout/activity_login.xml" value="0.2" />
-        <entry key="app/src/main/res/layout/activity_main.xml" value="0.33" />
-        <entry key="app/src/main/res/layout/activity_register.xml" value="0.18" />
+        <entry key="app/src/main/res/layout/activity_main.xml" value="0.2" />
+        <entry key="app/src/main/res/layout/activity_register.xml" value="0.22" />
         <entry key="app/src/main/res/layout/button_loading.xml" value="0.22" />
         <entry key="app/src/main/res/layout/dialog_custom.xml" value="0.25" />
-        <entry key="app/src/main/res/layout/fragment_profile.xml" value="0.33" />
+        <entry key="app/src/main/res/layout/fragment_profile.xml" value="0.16158940397350993" />
         <entry key="app/src/main/res/layout/fragment_register_confirm.xml" value="0.22" />
         <entry key="app/src/main/res/layout/fragment_register_email.xml" value="0.16" />
         <entry key="app/src/main/res/layout/fragment_register_name_password.xml" value="0.16" />
         <entry key="app/src/main/res/layout/fragment_register_photo.xml" value="0.22" />
+        <entry key="app/src/main/res/layout/item_grid_photo.xml" value="0.25" />
         <entry key="app/src/main/res/menu/menu_bottom_navigation.xml" value="0.34202898550724636" />
         <entry key="app/src/main/res/menu/menu_prfile_button_nav.xml" value="0.5" />
       </map>

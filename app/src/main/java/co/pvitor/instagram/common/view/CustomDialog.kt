@@ -49,7 +49,6 @@ class CustomDialog(context: Context): Dialog(context) {
     override fun show() {
 
         super.show()
-
         textTitle?.let {
             binding.textViewTitle.text = it
         }
@@ -61,19 +60,16 @@ class CustomDialog(context: Context): Dialog(context) {
     }
 
     private fun itemLayoutParams (): LinearLayout.LayoutParams {
-
         val layoutParams = LinearLayout.LayoutParams(
             LinearLayout.LayoutParams.MATCH_PARENT,
             LinearLayout.LayoutParams.WRAP_CONTENT
         )
-
         layoutParams.setMargins(
             30,
             50,
             30,
             50
         )
-
         return layoutParams
     }
 
