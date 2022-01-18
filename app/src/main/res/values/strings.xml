@@ -22,4 +22,18 @@
     <string name="define_photo">Definir uma foto de perfil</string>
     <string name="galery">Galeria</string>
     <string name="camera">Câmera</string>
+    <string name="menu_home">Home</string>
+    <string name="menu_sarch">Pesquisar</string>
+    <string name="menu_add">Adicionar</string>
+    <string name="menu_search">Pesquisar</string>
+    <string name="menu_fav">Favorito</string>
+    <string name="menu_profile">Perfil</string>
+    <string name="profile_posts_counter">Publicações</string>
+    <string name="profile_posts_followers_counter">Seguidores</string>
+    <string name="profile_posts_following_counter">Seguindo</string>
+    <string name="username">Nome do usuário</string>
+    <string name="edit_profile">Editar perfil</string>
+    <string name="menu_profile_grid">Imagens</string>
+    <string name="menu_profile_list">Lista</string>
+    <string name="menu_profile_user">Usuário</string>
 </resources>

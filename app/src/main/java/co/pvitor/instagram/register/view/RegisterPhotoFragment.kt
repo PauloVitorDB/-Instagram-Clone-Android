@@ -1,4 +1,4 @@
-package co.pvitor.instagram.view.login
+package co.pvitor.instagram.register.view
 
 import android.os.Bundle
 import android.util.Log
