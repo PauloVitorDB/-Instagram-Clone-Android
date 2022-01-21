@@ -8,4 +8,6 @@
     <dimen name="subtitle_horizontal_padding">24dp</dimen>
     <dimen name="custom_dialog_horizontal_item_padding">30</dimen>
     <dimen name="custom_dialog_vertical_item_spacing">50</dimen>
+    <dimen name="bottom_sheet_dialog_corners">20dp</dimen>
+    <dimen name="bottom_sheet_dialog_top_padding">18dp</dimen>
 </resources>

@@ -109,11 +109,26 @@
     </style>
 
     <style name="Theme.Instagram.TextViewProfile">
-        <item name="android:textColor">@color/black</item>
-        <item name="android:textStyle">bold</item>
         <item name="android:textAlignment">center</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_width">0dp</item>
+    </style>
+
+    <style name="Theme.Instagram.TextViewProfile.Counter">
+        <item name="android:textColor">@color/black</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="Theme.Instagram.BottomSheetTextView" parent="TextAppearance.MaterialComponents.Body2">
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="BottomSheet" parent="@style/Widget.Design.BottomSheet.Modal">
+        <item name="android:background">@drawable/bg_bottom_sheet_dialog_fragment</item>
+    </style>
+
+    <style name="BaseBottomSheetDialogTheme" parent="@style/Theme.Design.Light.BottomSheetDialog">
+        <item name="bottomSheetStyle">@style/BottomSheet</item>
     </style>
 
 </resources>

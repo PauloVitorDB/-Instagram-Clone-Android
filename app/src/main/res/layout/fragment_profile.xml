@@ -40,7 +40,7 @@
         <TextView
             android:id="@+id/text_view_posts_counter"
             android:text="0"
-            style="@style/Theme.Instagram.TextViewProfile"
+            style="@style/Theme.Instagram.TextViewProfile.Counter"
             app:layout_constraintStart_toEndOf="@id/civ_profile_photo"
             app:layout_constraintTop_toTopOf="@id/civ_profile_photo"
             app:layout_constraintEnd_toStartOf="@id/text_view_followers_counter"
@@ -51,7 +51,7 @@
         <TextView
             android:id="@+id/text_view_followers_counter"
             android:text="0"
-            style="@style/Theme.Instagram.TextViewProfile"
+            style="@style/Theme.Instagram.TextViewProfile.Counter"
             app:layout_constraintEnd_toStartOf="@id/text_view_following_counter"
             app:layout_constraintStart_toEndOf="@id/text_view_posts_counter"
             app:layout_constraintTop_toTopOf="@id/civ_profile_photo"
@@ -62,7 +62,7 @@
         <TextView
             android:id="@+id/text_view_following_counter"
             android:text="0"
-            style="@style/Theme.Instagram.TextViewProfile"
+            style="@style/Theme.Instagram.TextViewProfile.Counter"
             android:layout_marginEnd="16dp"
             app:layout_constraintStart_toEndOf="@id/text_view_followers_counter"
             app:layout_constraintTop_toTopOf="@id/civ_profile_photo"
@@ -74,6 +74,8 @@
         <TextView
             android:id="@+id/text_view_posts"
             android:text="@string/profile_posts_counter"
+            android:maxLength="8"
+            android:ellipsize="end"
             style="@style/Theme.Instagram.TextViewProfile"
             app:layout_constraintStart_toStartOf="@id/text_view_posts_counter"
             app:layout_constraintTop_toBottomOf="@id/text_view_posts_counter"
@@ -84,6 +86,8 @@
         <TextView
             android:id="@+id/text_view_followers"
             android:text="@string/profile_posts_followers_counter"
+            android:maxLength="8"
+            android:ellipsize="end"
             style="@style/Theme.Instagram.TextViewProfile"
             app:layout_constraintTop_toBottomOf="@id/text_view_followers_counter"
             app:layout_constraintStart_toEndOf="@id/text_view_posts"
@@ -94,6 +98,8 @@
         <TextView
             android:id="@+id/text_view_following"
             android:text="@string/profile_posts_following_counter"
+            android:maxLength="8"
+            android:ellipsize="end"
             style="@style/Theme.Instagram.TextViewProfile"
             app:layout_constraintTop_toBottomOf="@id/text_view_following_counter"
             app:layout_constraintStart_toEndOf="@id/text_view_followers"

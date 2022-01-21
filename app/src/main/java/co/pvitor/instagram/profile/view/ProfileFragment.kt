@@ -4,13 +4,18 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import co.pvitor.instagram.R
+import co.pvitor.instagram.common.view.BottomSheetItem
+import co.pvitor.instagram.common.view.ModalBottomSheetDialog
 import co.pvitor.instagram.databinding.FragmentProfileBinding
 import co.pvitor.instagram.databinding.ItemGridPhotoBinding
+import com.google.android.material.bottomsheet.BottomSheetBehavior
+import com.google.android.material.bottomsheet.BottomSheetDialog
+import com.google.android.material.bottomsheet.BottomSheetDialogFragment
+import com.google.android.material.snackbar.Snackbar
 
 class ProfileFragment: Fragment() {
 
@@ -32,9 +37,28 @@ class ProfileFragment: Fragment() {
         val rvPhotoGrid: RecyclerView = binding.recyclerViewPhotoGrid
         rvPhotoGrid.layoutManager = GridLayoutManager(requireContext(), 3)
         rvPhotoGrid.adapter = PhotoGridAdapter()
+
+        val modalBottomSheetDialog = ModalBottomSheetDialog()
+
+        modalBottomSheetDialog.addItems(
+            BottomSheetItem(
+                R.string.config,
+                R.drawable.ic_baseline_settings_24
+            )
+        ) {
+            val text = when(it.id) {
+                R.string.add_perfil_photo -> "Peril foto"
+                R.string.app_name -> "App name"
+                else -> "not found"
+            }
+            modalBottomSheetDialog.dismiss()
+        }
+        modalBottomSheetDialog.show(childFragmentManager, "")
     }
 
 }
+
+
 
 class PhotoGridAdapter(
 
