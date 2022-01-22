@@ -144,18 +144,27 @@
             app:layout_constraintEnd_toEndOf="@id/text_view_following_counter"
         />
 
-        <com.google.android.material.bottomnavigation.BottomNavigationView
-            android:id="@+id/bottom_navigation_view_profile"
+        <com.google.android.material.tabs.TabLayout
+            android:id="@+id/tab_layout_profile_grid"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/bg_profile_navigation"
-            app:labelVisibilityMode="unlabeled"
-            app:itemIconTint="@color/black"
-            app:menu="@menu/menu_profile_button_nav"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/button_edit_profile"
             app:layout_constraintEnd_toEndOf="parent"
-        />
+            app:layout_constraintTop_toBottomOf="@id/button_edit_profile">
+            <com.google.android.material.tabs.TabItem
+                android:icon="@drawable/ic_insta_grid"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+            <com.google.android.material.tabs.TabItem
+                android:icon="@drawable/ic_insta_listed"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+            <com.google.android.material.tabs.TabItem
+                android:icon="@drawable/ic_insta_profile"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+            />
+        </com.google.android.material.tabs.TabLayout>
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recycler_view_photo_grid"
@@ -164,7 +173,7 @@
             tools:listitem="@layout/item_grid_photo"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/bottom_navigation_view_profile"
+            app:layout_constraintTop_toBottomOf="@id/tab_layout_profile_grid"
             app:layout_constraintBottom_toBottomOf="parent"
         />
 

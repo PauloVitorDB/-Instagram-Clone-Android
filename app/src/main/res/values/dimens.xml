@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <dimen name="activity_horizontal_margin_default">16dp</dimen>
     <dimen name="activity_horizontal_margin_small">36dp</dimen>
     <dimen name="activity_horizontal_margin_medium">52dp</dimen>
     <dimen name="view_small_spacing">16dp</dimen>
@@ -9,5 +10,6 @@
     <dimen name="custom_dialog_horizontal_item_padding">30</dimen>
     <dimen name="custom_dialog_vertical_item_spacing">50</dimen>
     <dimen name="bottom_sheet_dialog_corners">20dp</dimen>
-    <dimen name="bottom_sheet_dialog_top_padding">18dp</dimen>
+    <dimen name="bottom_sheet_dialog_top_padding">16dp</dimen>
+    <dimen name="home_profile_photo">26dp</dimen>
 </resources>

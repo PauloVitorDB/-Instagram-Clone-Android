@@ -37,4 +37,8 @@
     <string name="menu_profile_list">Lista</string>
     <string name="menu_profile_user">Usuário</string>
     <string name="config">Configurações</string>
+    <string name="profile_username">Username</string>
+    <string name="lorem_ipsum">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec eget velit in erat laoreet dignissim sed quis urna. Nulla vitae interdum risus. Nulla facilisi. Cras in efficitur ex, et bibendum ante. Nunc vehicula blandit erat. In porta tortor quis velit tempor, ac congue arcu elementum. Fusce dui eros, posuere in metus ut, eleifend consectetur ex. Cras sodales aliquam nisi, eu fermentum tellus accumsan at. Quisque elementum libero eu neque pellentesque, ac varius massa hendrerit. Mauris ac magna in lorem gravida tincidunt quis sed est. Sed ac arcu a velit consequat tristique. Nulla imperdiet nisi dolor, quis suscipit diam congue posuere. Suspendisse imperdiet nec tellus sit amet dignissim. Aliquam id libero ullamcorper, tempor mi nec, finibus neque.</string>
+    <string name="activities">Atividades</string>
+    <string name="stop_following">Deixar de seguir</string>
 </resources>

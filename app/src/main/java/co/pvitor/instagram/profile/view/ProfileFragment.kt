@@ -1,9 +1,8 @@
 package co.pvitor.instagram.profile.view
 
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.util.Log
+import android.view.*
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -12,14 +11,12 @@ import co.pvitor.instagram.common.view.BottomSheetItem
 import co.pvitor.instagram.common.view.ModalBottomSheetDialog
 import co.pvitor.instagram.databinding.FragmentProfileBinding
 import co.pvitor.instagram.databinding.ItemGridPhotoBinding
-import com.google.android.material.bottomsheet.BottomSheetBehavior
-import com.google.android.material.bottomsheet.BottomSheetDialog
-import com.google.android.material.bottomsheet.BottomSheetDialogFragment
-import com.google.android.material.snackbar.Snackbar
+import com.google.android.material.tabs.TabLayout
 
 class ProfileFragment: Fragment() {
 
     private lateinit var binding: FragmentProfileBinding
+    private lateinit var modalBottomSheetDialog: ModalBottomSheetDialog
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -29,36 +26,69 @@ class ProfileFragment: Fragment() {
         return inflater.inflate(R.layout.fragment_profile, container, false)
     }
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setHasOptionsMenu(true)
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 
-         super.onViewCreated(view, savedInstanceState)
-         binding = FragmentProfileBinding.bind(view)
+        super.onViewCreated(view, savedInstanceState)
+        binding = FragmentProfileBinding.bind(view)
 
         val rvPhotoGrid: RecyclerView = binding.recyclerViewPhotoGrid
         rvPhotoGrid.layoutManager = GridLayoutManager(requireContext(), 3)
         rvPhotoGrid.adapter = PhotoGridAdapter()
 
-        val modalBottomSheetDialog = ModalBottomSheetDialog()
-
+        modalBottomSheetDialog = ModalBottomSheetDialog()
         modalBottomSheetDialog.addItems(
             BottomSheetItem(
                 R.string.config,
                 R.drawable.ic_baseline_settings_24
             )
         ) {
-            val text = when(it.id) {
-                R.string.add_perfil_photo -> "Peril foto"
-                R.string.app_name -> "App name"
-                else -> "not found"
+
+            when(it.id) {
+                R.string.config -> Log.d("BottomSheet", "config")
             }
+
             modalBottomSheetDialog.dismiss()
         }
-        modalBottomSheetDialog.show(childFragmentManager, "")
+
+        val tabLayout: TabLayout = binding.tabLayoutProfileGrid
+
+        tabLayout.addOnTabSelectedListener(object: TabLayout.OnTabSelectedListener {
+            override fun onTabSelected(tab: TabLayout.Tab?) {
+                val tabId = tab?.id
+            }
+
+            override fun onTabUnselected(tab: TabLayout.Tab?) {
+                val tabId = tab?.id
+            }
+
+            override fun onTabReselected(tab: TabLayout.Tab?) {
+                val tabId = tab?.id
+            }
+
+        })
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.menu_toolbar_profile, menu)
+        super.onCreateOptionsMenu(menu, inflater)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when(item.itemId) {
+            R.id.menu_item_config -> {
+                modalBottomSheetDialog.show(childFragmentManager, "")
+                true
+            }
+            else -> super.onOptionsItemSelected(item)
+        }
     }
 
 }
-
-
 
 class PhotoGridAdapter(
 

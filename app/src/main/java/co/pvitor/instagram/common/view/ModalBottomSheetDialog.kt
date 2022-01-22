@@ -6,6 +6,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
 import android.widget.TextView
+import androidx.annotation.DrawableRes
+import androidx.annotation.StringRes
 import androidx.core.content.ContextCompat
 import co.pvitor.instagram.R
 import co.pvitor.instagram.databinding.ModalBottomSheetListBinding
@@ -86,6 +88,6 @@ class ModalBottomSheetDialog: BottomSheetDialogFragment() {
 }
 
 data class BottomSheetItem(
-    val textViewRes: Int,
-    val drawableIcon: Int?
+    @StringRes val textViewRes: Int,
+    @DrawableRes val drawableIcon: Int?
 )

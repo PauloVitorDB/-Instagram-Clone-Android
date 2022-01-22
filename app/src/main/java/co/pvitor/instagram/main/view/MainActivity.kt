@@ -1,7 +1,6 @@
 package co.pvitor.instagram.main.view
 
 import android.os.Bundle
-import android.view.WindowInsetsController
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import co.pvitor.instagram.databinding.ActivityMainBinding
@@ -17,9 +16,10 @@ class MainActivity: AppCompatActivity() {
 
         val toolbar: Toolbar = binding.toolbar
         setSupportActionBar(toolbar)
-
+        supportActionBar?.let {
+            title =""
+        }
 
         setContentView(binding.root)
     }
-
 }

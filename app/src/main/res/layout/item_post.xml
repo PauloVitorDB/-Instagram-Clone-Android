@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="@layout/fragment_home"
+>
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/civ_profile_photo"
+        android:src="@drawable/ic_insta_profile_thin"
+        android:layout_width="@dimen/home_profile_photo"
+        android:layout_height="@dimen/home_profile_photo"
+        android:layout_marginStart="@dimen/activity_horizontal_margin_default"
+        android:layout_marginTop="@dimen/activity_horizontal_margin_default"
+        app:civ_circle_background_color="@color/gray_darker"
+        app:civ_border_width="1dp"
+        app:civ_border_color="@color/gray_darker"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+    />
+
+    <TextView
+        android:text="@string/profile_username"
+        style="@style/Theme.Instagram.TextView"
+        android:textStyle="bold"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:layout_marginHorizontal="@dimen/view_small_spacing"
+        android:textColor="@color/black"
+        app:layout_constraintStart_toEndOf="@id/civ_profile_photo"
+        app:layout_constraintTop_toTopOf="@id/civ_profile_photo"
+        app:layout_constraintBottom_toBottomOf="@id/civ_profile_photo"
+    />
+
+    <ImageView
+        android:id="@+id/post_settings"
+        android:src="@drawable/ic_more"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/view_small_spacing"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/civ_profile_photo"
+        app:layout_constraintBottom_toBottomOf="@id/civ_profile_photo"
+    />
+
+    <ImageView
+        android:id="@+id/image_view_post_photo"
+        android:src="@drawable/insta_grid_photo"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="@dimen/view_small_spacing"
+        android:scaleType="centerCrop"
+        app:layout_constraintDimensionRatio="1:1"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/civ_profile_photo"
+        android:contentDescription="@null"
+    />
+
+    <LinearLayout
+        android:id="@+id/post_bottom_options"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingVertical="@dimen/view_small_spacing"
+        android:layout_marginHorizontal="@dimen/view_small_spacing"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/image_view_post_photo"
+    >
+        <ImageView
+            android:src="@drawable/ic_insta_heart"
+            style="@style/Theme.Instagram.Icon"
+        />
+
+        <ImageView
+            android:src="@drawable/ic_insta_comment"
+            style="@style/Theme.Instagram.Icon"
+        />
+
+        <ImageView
+            android:src="@drawable/ic_insta_send"
+            style="@style/Theme.Instagram.Icon"
+        />
+
+    </LinearLayout>
+
+    <TextView
+        android:text="@string/lorem_ipsum"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:ellipsize="end"
+        android:maxLines="3"
+        app:layout_constraintStart_toStartOf="@id/post_bottom_options"
+        app:layout_constraintEnd_toEndOf="@id/post_bottom_options"
+        app:layout_constraintTop_toBottomOf="@id/post_bottom_options"
+    />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
