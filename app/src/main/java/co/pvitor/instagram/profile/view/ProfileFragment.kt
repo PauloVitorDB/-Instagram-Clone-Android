@@ -15,7 +15,9 @@ import com.google.android.material.tabs.TabLayout
 
 class ProfileFragment: Fragment() {
 
-    private lateinit var binding: FragmentProfileBinding
+    private var _binding: FragmentProfileBinding? = null
+    private val binding get() = _binding!!
+
     private lateinit var modalBottomSheetDialog: ModalBottomSheetDialog
 
     override fun onCreateView(
@@ -34,7 +36,7 @@ class ProfileFragment: Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 
         super.onViewCreated(view, savedInstanceState)
-        binding = FragmentProfileBinding.bind(view)
+        _binding = FragmentProfileBinding.bind(view)
 
         val rvPhotoGrid: RecyclerView = binding.recyclerViewPhotoGrid
         rvPhotoGrid.layoutManager = GridLayoutManager(requireContext(), 3)
@@ -71,6 +73,11 @@ class ProfileFragment: Fragment() {
             }
 
         })
+    }
+
+    override fun onDestroy() {
+        _binding = null
+        super.onDestroy()
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {

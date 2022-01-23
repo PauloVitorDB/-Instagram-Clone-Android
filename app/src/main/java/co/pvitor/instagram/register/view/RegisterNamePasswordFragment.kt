@@ -10,7 +10,8 @@ import co.pvitor.instagram.databinding.FragmentRegisterNamePasswordBinding
 
 class RegisterNamePasswordFragment: Fragment() {
 
-    private lateinit var binding: FragmentRegisterNamePasswordBinding
+    private var _binding: FragmentRegisterNamePasswordBinding? = null
+    private val binding get() = _binding!!
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -22,7 +23,12 @@ class RegisterNamePasswordFragment: Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding = FragmentRegisterNamePasswordBinding.bind(view)
+        _binding = FragmentRegisterNamePasswordBinding.bind(view)
+    }
+
+    override fun onDestroy() {
+        _binding = null
+        super.onDestroy()
     }
 
 }

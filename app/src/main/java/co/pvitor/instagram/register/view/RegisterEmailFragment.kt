@@ -10,7 +10,8 @@ import co.pvitor.instagram.databinding.FragmentRegisterEmailBinding
 
 class RegisterEmailFragment: Fragment() {
 
-    private lateinit var binding: FragmentRegisterEmailBinding
+    private var _binding: FragmentRegisterEmailBinding? = null
+    private val binding get() = _binding!!
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -22,7 +23,12 @@ class RegisterEmailFragment: Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding = FragmentRegisterEmailBinding.bind(view)
+        _binding = FragmentRegisterEmailBinding.bind(view)
+    }
+
+    override fun onDestroy() {
+        _binding = null
+        super.onDestroy()
     }
 
 }

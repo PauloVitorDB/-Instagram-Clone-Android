@@ -16,7 +16,9 @@ import co.pvitor.instagram.databinding.ItemPostBinding
 
 class HomeFragment: Fragment() {
 
-    private lateinit var binding: FragmentHomeBinding
+    private var _binding: FragmentHomeBinding? = null
+    private val binding get() = _binding!!
+
     private lateinit var modalBottomSheetDialog: ModalBottomSheetDialog
 
     override fun onCreateView(
@@ -35,7 +37,7 @@ class HomeFragment: Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 
         super.onViewCreated(view, savedInstanceState)
-        binding = FragmentHomeBinding.bind(view)
+        _binding = FragmentHomeBinding.bind(view)
 
         modalBottomSheetDialog = ModalBottomSheetDialog()
         modalBottomSheetDialog.addItems(
@@ -54,6 +56,11 @@ class HomeFragment: Fragment() {
         val recyclerViewPosts = binding.recyclerViewPosts
         recyclerViewPosts.layoutManager = LinearLayoutManager(requireContext(), RecyclerView.VERTICAL, false)
         recyclerViewPosts.adapter = PostAdapter(this, modalBottomSheetDialog)
+    }
+
+    override fun onDestroy() {
+        _binding = null
+        super.onDestroy()
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {

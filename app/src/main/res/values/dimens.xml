@@ -12,4 +12,5 @@
     <dimen name="bottom_sheet_dialog_corners">20dp</dimen>
     <dimen name="bottom_sheet_dialog_top_padding">16dp</dimen>
     <dimen name="home_profile_photo">26dp</dimen>
+    <dimen name="camera_photo_dimension">96dp</dimen>
 </resources>

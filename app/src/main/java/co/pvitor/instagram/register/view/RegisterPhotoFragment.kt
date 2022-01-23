@@ -12,7 +12,9 @@ import co.pvitor.instagram.databinding.FragmentRegisterPhotoBinding
 
 class RegisterPhotoFragment: Fragment() {
 
-    private lateinit var binding: FragmentRegisterPhotoBinding
+    private var _binding: FragmentRegisterPhotoBinding? = null
+    private val binding get() = _binding!!
+
     private lateinit var dialog: CustomDialog
 
     override fun onCreateView(
@@ -26,7 +28,7 @@ class RegisterPhotoFragment: Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 
         super.onViewCreated(view, savedInstanceState)
-        binding = FragmentRegisterPhotoBinding.bind(view)
+        _binding = FragmentRegisterPhotoBinding.bind(view)
 
         dialog = CustomDialog(requireContext())
 
@@ -48,5 +50,10 @@ class RegisterPhotoFragment: Fragment() {
         }
         dialog.setTitle(getText(R.string.add_profile_photo))
         dialog.show()
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        _binding = null
     }
 }

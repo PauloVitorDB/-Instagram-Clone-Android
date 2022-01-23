@@ -15,7 +15,9 @@ import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 
 class ModalBottomSheetDialog: BottomSheetDialogFragment() {
 
-    private lateinit var binding: ModalBottomSheetListBinding
+    private var _binding: ModalBottomSheetListBinding? = null
+    private val binding get() = _binding!!
+
     private var bottomSheetItemList = mutableListOf<BottomSheetItem>()
     private lateinit var itemListener: View.OnClickListener
 
@@ -30,7 +32,7 @@ class ModalBottomSheetDialog: BottomSheetDialogFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 
         super.onViewCreated(view, savedInstanceState)
-        binding = ModalBottomSheetListBinding.bind(view)
+        _binding = ModalBottomSheetListBinding.bind(view)
 
         for(bottomSheetItem in bottomSheetItemList) {
 
@@ -56,6 +58,11 @@ class ModalBottomSheetDialog: BottomSheetDialogFragment() {
             binding.root.addView(textView, layoutParams())
         }
 
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        _binding = null
     }
 
     fun addItems(vararg bottomSheetItem: BottomSheetItem, listener: View.OnClickListener) {
