@@ -11,7 +11,7 @@ interface Login {
         fun displayEmailFailure(@StringRes message: Int?)
         fun displayPasswordFailure(@StringRes message: Int?)
         fun onUserAuthenticate()
-        fun onUserUnauthorized(@StringRes message: Int)
+        fun onUserUnauthorized(@StringRes message: Int?)
     }
 
     interface Presenter: BasePresenter {

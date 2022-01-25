@@ -45,4 +45,6 @@
     <string name="invalid_password">Senha incorreta</string>
     <string name="invalid_password_length">Senha precisa ter mais que 8 caracteres</string>
     <string name="login_error">Falha ao fazer login</string>
+    <string name="email_not_found">E-mail não encontrado</string>
+    <string name="wrong_password">Senha invalida</string>
 </resources>

@@ -1,7 +1,9 @@
 package co.pvitor.instagram.login.data
 
-interface LoginCallback {
-    fun onSuccess()
-    fun onFailure(message: String)
+import androidx.annotation.StringRes
+
+interface LoginCallback<T> {
+    fun onSuccess(response: T)
+    fun onFailure(@StringRes message: Int?)
     fun onComplete()
 }
