@@ -9,6 +9,7 @@ import android.widget.Button
 import android.widget.FrameLayout
 import android.widget.ProgressBar
 import co.pvitor.instagram.R
+import co.pvitor.instagram.common.util.InputListener
 
 class LoadingButton: FrameLayout {
 
@@ -51,7 +52,10 @@ class LoadingButton: FrameLayout {
     }
 
     override fun setOnClickListener(l: OnClickListener?) {
-        button.setOnClickListener(l)
+        button.setOnClickListener {
+            l?.onClick(it)
+            InputListener.hideInputOnClick(it)
+        }
     }
 
     fun showProgress(enabled: Boolean) {
