@@ -47,4 +47,9 @@
     <string name="login_error">Falha ao fazer login</string>
     <string name="email_not_found">E-mail não encontrado</string>
     <string name="wrong_password">Senha invalida</string>
+    <string name="email_alredy_exists">E-mail já cadastrado</string>
+    <string name="invalid_password_lenght">Senha precisa ter mais que 8 caracteres</string>
+    <string name="invalid_name_length">Nome precisa ter mais que 3 caracteres</string>
+    <string name="register_error_user_exists">Usuário já existe</string>
+    <string name="register_fail">Não foi possível registrar o usuário</string>
 </resources>

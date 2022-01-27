@@ -30,15 +30,18 @@
             />
 
             <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/text_input_layout_register_email_input"
                 app:hintEnabled="false"
                 style="@style/Theme.Instagram.FormEditTextInput">
                 <com.google.android.material.textfield.TextInputEditText
+                   android:id="@+id/text_input_edit_text_register_email"
                     android:hint="@string/next"
                     style="@style/Theme.Instagram.FormEditText"/>
 
             </com.google.android.material.textfield.TextInputLayout>
 
             <co.pvitor.instagram.common.view.LoadingButton
+                android:id="@+id/loading_button_register_email"
                 app:text="@string/next"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

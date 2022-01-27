@@ -3,6 +3,8 @@ package co.pvitor.instagram.login.view
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.text.TextWatcher
+import android.view.View
 import androidx.annotation.StringRes
 import co.pvitor.instagram.common.base.DependencyInjector
 import co.pvitor.instagram.common.util.CustomTextWatcher
@@ -11,6 +13,7 @@ import co.pvitor.instagram.databinding.ActivityLoginBinding
 import co.pvitor.instagram.login.Login
 import co.pvitor.instagram.login.presentation.LoginPresenter
 import co.pvitor.instagram.main.view.MainActivity
+import co.pvitor.instagram.register.view.RegisterActivity
 import com.google.android.material.snackbar.Snackbar
 
 class LoginActivity : AppCompatActivity(), Login.View {
@@ -40,7 +43,14 @@ class LoginActivity : AppCompatActivity(), Login.View {
 
         }
 
+        binding.textViewRegister.setOnClickListener(onRegister)
+
         setContentView(binding.root)
+    }
+
+    private val onRegister = View.OnClickListener {
+        val intent = Intent(this, RegisterActivity::class.java)
+        startActivity(intent)
     }
 
     override fun onDestroy() {
@@ -48,7 +58,7 @@ class LoginActivity : AppCompatActivity(), Login.View {
         presenter.onDestroy()
     }
 
-    private val watcher = CustomTextWatcher() {
+    private val watcher: TextWatcher = CustomTextWatcher() {
         binding.loadingButtonLogin.isEnabled = (
                 binding.textInputEditTextLogin.text.toString().isNotEmpty() &&
                 binding.textInputEditTextPassword.text.toString().isNotEmpty()
