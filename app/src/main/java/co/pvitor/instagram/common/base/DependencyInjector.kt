@@ -14,7 +14,7 @@ object DependencyInjector {
         return LoginRepository(dataSource)
     }
 
-    fun registerEmailRepository(): RegisterRepository {
+    fun registerRepository(): RegisterRepository {
         val dataSource: RegisterDataSource = FakeRegisterDataSource()
         return RegisterRepository(dataSource)
     }

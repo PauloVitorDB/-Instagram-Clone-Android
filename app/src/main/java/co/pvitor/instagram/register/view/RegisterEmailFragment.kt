@@ -30,7 +30,7 @@ class RegisterEmailFragment: Fragment(), RegisterEmail.View {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        presenter = RegisterEmailPresenter(this, DependencyInjector.registerEmailRepository())
+        presenter = RegisterEmailPresenter(this, DependencyInjector.registerRepository())
     }
 
     override fun onCreateView(
@@ -98,7 +98,7 @@ class RegisterEmailFragment: Fragment(), RegisterEmail.View {
             }
         }
 
-        fragmentAttachListener.nextStep(fragment, email)
+        fragmentAttachListener.replaceFragment(fragment)
     }
 
 }

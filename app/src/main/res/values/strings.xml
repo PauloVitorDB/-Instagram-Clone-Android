@@ -12,7 +12,7 @@
     <string name="button_continue">Continuar</string>
     <string name="register">Cadastre-se</string>
     <string name="register_instagram_policy">Ao clicar em Cadastre-se, você concorda com nossos <font color="#000000"><b>Termos</b></font>, com a <font color="#000000"><b>Política de Dados</b></font> e com a <font color="#000000"><b>Política de Cookies</b></font>.</string>
-    <string name="confirm_registration">Cadastrar-se como\n$1%s?</string>
+    <string name="confirm_registration">Cadastrar-se como\n %s?</string>
     <string name="text_view_user_name_alter_info">Você poderá alterar seu nome de usuário depois.</string>
     <string name="add_perfil_photo">Adicionar foto de perfil</string>
     <string name="add_profile_photo">Adicionar foto de perfil</string>
@@ -52,4 +52,7 @@
     <string name="invalid_name_length">Nome precisa ter mais que 3 caracteres</string>
     <string name="register_error_user_exists">Usuário já existe</string>
     <string name="register_fail">Não foi possível registrar o usuário</string>
+    <string name="hint_email">E-mail</string>
+    <string name="cancel">Cancelar</string>
+    <string name="save">Salvar</string>
 </resources>

@@ -12,7 +12,7 @@
         android:textStyle="bold"
         android:textColor="@color/black"
         style="@style/TextAppearance.AppCompat.Body2"
-        android:padding="8dp"
+        android:padding="10dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="start"

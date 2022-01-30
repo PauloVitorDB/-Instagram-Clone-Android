@@ -1,5 +1,6 @@
 package co.pvitor.instagram.register.view
 
+import android.content.Context
 import android.os.Bundle
 import android.text.TextWatcher
 import android.util.Log
@@ -8,6 +9,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import co.pvitor.instagram.R
+import co.pvitor.instagram.common.base.DependencyInjector
+import co.pvitor.instagram.common.model.UserAuth
 import co.pvitor.instagram.common.util.CustomTextWatcher
 import co.pvitor.instagram.databinding.FragmentRegisterNamePasswordBinding
 import co.pvitor.instagram.register.RegisterNamePassword
@@ -18,12 +21,21 @@ class RegisterNamePasswordFragment: Fragment(), RegisterNamePassword.View {
 
     companion object {
         const val KEY_EMAIL = "email"
+        const val KEY_NAME = "name"
     }
 
     private var _binding: FragmentRegisterNamePasswordBinding? = null
     private val binding get() = _binding!!
 
     override lateinit var presenter: RegisterNamePassword.Presenter
+
+    private var _fragmentAttachListener: FragmentAttachListener? = null
+    private val fragmentAttachListener get() = _fragmentAttachListener!!
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        presenter = RegisterNamePasswordPresenter(this, DependencyInjector.registerRepository())
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -67,8 +79,16 @@ class RegisterNamePasswordFragment: Fragment(), RegisterNamePassword.View {
         )
     }
 
+    override fun onAttach(context: Context) {
+        if(context is RegisterActivity) {
+            _fragmentAttachListener = context
+        }
+        super.onAttach(context)
+    }
+
     override fun onDestroy() {
         _binding = null
+        _fragmentAttachListener = null
         presenter.onDestroy()
         super.onDestroy()
     }
@@ -92,7 +112,7 @@ class RegisterNamePasswordFragment: Fragment(), RegisterNamePassword.View {
     }
 
     override fun nextStep(fragment: Fragment) {
-
+        fragmentAttachListener.replaceFragment(fragment)
     }
 
 }

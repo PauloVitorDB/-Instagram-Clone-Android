@@ -28,9 +28,10 @@
         <entry key="app/src/main/res/layout/button_loading.xml" value="0.22" />
         <entry key="app/src/main/res/layout/dialog_custom.xml" value="0.25" />
         <entry key="app/src/main/res/layout/fragment_home.xml" value="0.31851851851851853" />
+        <entry key="app/src/main/res/layout/fragment_image_cropper.xml" value="0.25" />
         <entry key="app/src/main/res/layout/fragment_photo.xml" value="0.14719202898550723" />
         <entry key="app/src/main/res/layout/fragment_profile.xml" value="0.25" />
-        <entry key="app/src/main/res/layout/fragment_register_confirm.xml" value="0.22" />
+        <entry key="app/src/main/res/layout/fragment_register_confirm.xml" value="0.29737206085753803" />
         <entry key="app/src/main/res/layout/fragment_register_email.xml" value="0.36666666666666664" />
         <entry key="app/src/main/res/layout/fragment_register_name_password.xml" value="0.16" />
         <entry key="app/src/main/res/layout/fragment_register_photo.xml" value="0.22" />

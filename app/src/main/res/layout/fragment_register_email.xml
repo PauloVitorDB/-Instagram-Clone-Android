@@ -34,8 +34,9 @@
                 app:hintEnabled="false"
                 style="@style/Theme.Instagram.FormEditTextInput">
                 <com.google.android.material.textfield.TextInputEditText
-                   android:id="@+id/text_input_edit_text_register_email"
-                    android:hint="@string/next"
+                    android:id="@+id/text_input_edit_text_register_email"
+                    android:hint="@string/hint_email"
+                    android:inputType="textEmailAddress"
                     style="@style/Theme.Instagram.FormEditText"/>
 
             </com.google.android.material.textfield.TextInputLayout>

@@ -16,7 +16,7 @@
         app:layout_constraintVertical_bias="0.1"
     >
 
-        <ImageView
+        <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/image_view_add_photo"
             android:src="@drawable/camera_icon"
             android:layout_width="150dp"
@@ -52,6 +52,7 @@
         />
 
         <Button
+            android:id="@+id/button_skip_step"
             android:text="@string/skip_step"
             style="@style/Theme.Instagram.ButtonLink"
             android:layout_gravity="center"

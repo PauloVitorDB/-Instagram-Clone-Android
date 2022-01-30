@@ -22,6 +22,7 @@ class CustomDialog(context: Context): Dialog(context) {
         binding = DialogCustomBinding.inflate(layoutInflater)
 
         this.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+
         setContentView(binding.root)
 
     }
@@ -72,5 +73,6 @@ class CustomDialog(context: Context): Dialog(context) {
         )
         return layoutParams
     }
+
 
 }

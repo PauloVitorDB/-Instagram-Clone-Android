@@ -1,10 +1,14 @@
 package co.pvitor.instagram.register.presentation
 
+import android.os.Bundle
+import androidx.fragment.app.Fragment
 import co.pvitor.instagram.R
 import co.pvitor.instagram.common.model.UserAuth
 import co.pvitor.instagram.register.RegisterNamePassword
 import co.pvitor.instagram.register.data.RegisterCallback
 import co.pvitor.instagram.register.data.RegisterRepository
+import co.pvitor.instagram.register.view.RegisterConfirmFragment
+import co.pvitor.instagram.register.view.RegisterNamePasswordFragment.Companion.KEY_NAME
 
 class RegisterNamePasswordPresenter(
     private var _view: RegisterNamePassword.View?,
@@ -34,7 +38,13 @@ class RegisterNamePasswordPresenter(
             repository.register(email, password, name, object: RegisterCallback<UserAuth> {
 
                 override fun onSuccess(response: UserAuth) {
-
+                    val fragment: Fragment = RegisterConfirmFragment()
+                    fragment.apply {
+                        arguments = Bundle().apply {
+                            putString(KEY_NAME, name)
+                        }
+                    }
+                    view.nextStep(fragment)
                 }
 
                 override fun onFailure(message: Int?) {

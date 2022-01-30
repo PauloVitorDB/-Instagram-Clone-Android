@@ -45,7 +45,7 @@ class FakeRegisterDataSource: RegisterDataSource {
 
             val isUserRegistered = Database.usersAuth.add(userAuth)
 
-            if(isUserRegistered) {
+            if(!isUserRegistered) {
                 callback.onFailure(R.string.register_fail)
             } else {
                 callback.onSuccess(userAuth)
