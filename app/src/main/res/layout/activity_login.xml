@@ -104,6 +104,7 @@
         android:id="@+id/text_view_register"
         android:text="@string/login_register"
         style="@style/Theme.Instagram.TextViewBase"
+        android:textColor="@color/black"
         android:background="@color/white"
         android:padding="@dimen/text_item_padding"
         app:layout_constraintStart_toStartOf="parent"

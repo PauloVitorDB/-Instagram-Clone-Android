@@ -4,9 +4,9 @@
     <string name="login_password">Senha</string>
     <string name="enter">Entrar</string>
     <string name="or">Ou</string>
-    <string name="login_register">Não tem uma conta? <b><font color="#000000">Cadastre-se.</font></b></string>
+    <string name="login_register">Não tem uma conta? <b>Cadastre-se.</b></string>
     <string name="next">Avançar</string>
-    <string name="step_login">Já tem uma conta? <b><font color="#000000">Entrar</font></b></string>
+    <string name="step_login">Já tem uma conta? <b>Entrar</b></string>
     <string name="complete_name">Nome completo</string>
     <string name="label_name_and_password">Nome e Senha</string>
     <string name="button_continue">Continuar</string>
@@ -55,4 +55,5 @@
     <string name="hint_email">E-mail</string>
     <string name="cancel">Cancelar</string>
     <string name="save">Salvar</string>
+    <string name="session_user_not_found">Usuário não está logado</string>
 </resources>

@@ -11,6 +11,7 @@ import androidx.annotation.StringRes
 import androidx.fragment.app.Fragment
 import co.pvitor.instagram.R
 import co.pvitor.instagram.common.base.DependencyInjector
+import co.pvitor.instagram.common.extensions.hideKeyboard
 import co.pvitor.instagram.common.util.CustomTextWatcher
 import co.pvitor.instagram.databinding.FragmentRegisterEmailBinding
 import co.pvitor.instagram.login.view.LoginActivity
@@ -52,6 +53,7 @@ class RegisterEmailFragment: Fragment(), RegisterEmail.View {
 
         binding.loadingButtonRegisterEmail.setOnClickListener {
             presenter.registerEmail(binding.textInputEditTextRegisterEmail.text.toString())
+            activity?.hideKeyboard()
         }
 
     }

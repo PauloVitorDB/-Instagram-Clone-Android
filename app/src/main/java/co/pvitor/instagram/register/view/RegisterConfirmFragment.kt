@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import co.pvitor.instagram.R
+import co.pvitor.instagram.common.extensions.hideKeyboard
 import co.pvitor.instagram.databinding.FragmentRegisterConfirmBinding
 import co.pvitor.instagram.register.view.RegisterNamePasswordFragment.Companion.KEY_NAME
 
@@ -23,6 +24,7 @@ class RegisterConfirmFragment: Fragment() {
             _fragmentAttachListener = context
         }
         super.onAttach(context)
+        activity?.hideKeyboard()
     }
 
     override fun onCreateView(

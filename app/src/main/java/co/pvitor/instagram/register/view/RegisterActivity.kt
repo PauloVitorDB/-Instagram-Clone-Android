@@ -12,6 +12,7 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.FileProvider
 import androidx.fragment.app.Fragment
 import co.pvitor.instagram.R
+import co.pvitor.instagram.common.extensions.hideKeyboard
 import co.pvitor.instagram.common.view.CropperImageFragment
 import co.pvitor.instagram.common.view.CropperImageFragment.Companion.KEY_URI
 import co.pvitor.instagram.databinding.ActivityRegisterBinding
@@ -101,7 +102,6 @@ class RegisterActivity : AppCompatActivity(), FragmentAttachListener {
 
         photoFile?.also {
 
-            // https://developer.android.com/reference/androidx/core/content/FileProvider
             val photoUri: Uri = FileProvider.getUriForFile(
                 this,
                 "co.pvitor.instagram.fileprovider",
@@ -111,9 +111,7 @@ class RegisterActivity : AppCompatActivity(), FragmentAttachListener {
             currentPhotoUri = photoUri
 
             try {
-
                 getCamera.launch(currentPhotoUri)
-
             } catch(e: ActivityNotFoundException) {
                 Log.e("activityNotFound", e.message.toString())
             }
@@ -127,7 +125,11 @@ class RegisterActivity : AppCompatActivity(), FragmentAttachListener {
 
         val file: File? = try {
             val dir = getExternalFilesDir(Environment.DIRECTORY_PICTURES)
-            val timestamp = SimpleDateFormat("yyyyMMdd_HHmmss", Locale.getDefault()).format(Date())
+            val timestamp = SimpleDateFormat(
+                "yyyyMMdd_HHmmss",
+                Locale.getDefault()).format(
+                Date()
+            )
             File.createTempFile("JPEG_${timestamp}_", ".jpg", dir)
         } catch (e: IOException) {
             Log.e("CreateImageFile", e.message.toString())

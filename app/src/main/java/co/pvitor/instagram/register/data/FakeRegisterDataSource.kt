@@ -1,8 +1,11 @@
 package co.pvitor.instagram.register.data
 
+import android.net.Uri
+import android.os.Looper
 import co.pvitor.instagram.R
 import co.pvitor.instagram.common.model.Database
 import co.pvitor.instagram.common.model.UserAuth
+import co.pvitor.instagram.common.model.UserPhoto
 import java.util.*
 
 class FakeRegisterDataSource: RegisterDataSource {
@@ -44,13 +47,34 @@ class FakeRegisterDataSource: RegisterDataSource {
             )
 
             val isUserRegistered = Database.usersAuth.add(userAuth)
+            Database.sessionUserAuth = userAuth
 
             if(!isUserRegistered) {
                 callback.onFailure(R.string.register_fail)
             } else {
+
                 callback.onSuccess(userAuth)
             }
 
+        }
+
+        callback.onComplete()
+    }
+
+    override fun updateUserPhoto(uri: Uri, callback: RegisterCallback<Uri>) {
+
+        val userAuth = Database.sessionUserAuth
+
+        if(userAuth == null) {
+            callback.onFailure(R.string.session_user_not_found)
+        } else {
+
+            Database.userPhoto = UserPhoto(
+                userAuth.uuid,
+                uri
+            )
+
+            callback.onSuccess(uri)
         }
 
         callback.onComplete()

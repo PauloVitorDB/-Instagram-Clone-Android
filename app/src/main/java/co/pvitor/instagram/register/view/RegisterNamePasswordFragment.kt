@@ -10,6 +10,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import co.pvitor.instagram.R
 import co.pvitor.instagram.common.base.DependencyInjector
+import co.pvitor.instagram.common.extensions.hideKeyboard
 import co.pvitor.instagram.common.model.UserAuth
 import co.pvitor.instagram.common.util.CustomTextWatcher
 import co.pvitor.instagram.databinding.FragmentRegisterNamePasswordBinding
@@ -65,6 +66,7 @@ class RegisterNamePasswordFragment: Fragment(), RegisterNamePassword.View {
                         textInputEditTextRegisterPassword.text.toString(),
                         textInputEditTextName.text.toString()
                     )
+                    activity?.hideKeyboard()
                 }
             }
 
