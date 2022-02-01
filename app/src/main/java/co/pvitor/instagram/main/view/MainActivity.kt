@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
+import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.fragment.app.Fragment
 import co.pvitor.instagram.R
 import co.pvitor.instagram.camera.view.PhotoFragment
@@ -11,6 +12,7 @@ import co.pvitor.instagram.common.extensions.replaceFragment
 import co.pvitor.instagram.databinding.ActivityMainBinding
 import co.pvitor.instagram.home.view.HomeFragment
 import co.pvitor.instagram.profile.view.ProfileFragment
+import com.google.android.material.appbar.AppBarLayout
 import com.google.android.material.navigation.NavigationBarView
 
 class MainActivity: AppCompatActivity(), NavigationBarView.OnItemSelectedListener {
@@ -41,12 +43,38 @@ class MainActivity: AppCompatActivity(), NavigationBarView.OnItemSelectedListene
         setContentView(binding.root)
     }
 
+    private fun setScrollToolbar(enabled: Boolean) {
+
+        val toolbarAppBarParams = binding.toolbar.layoutParams as AppBarLayout.LayoutParams
+        val appBarLayoutCoordinatorLayout = binding.appBarLayout.layoutParams as CoordinatorLayout.LayoutParams
+
+        if(enabled) {
+            toolbarAppBarParams.scrollFlags = AppBarLayout.LayoutParams.SCROLL_FLAG_SCROLL or AppBarLayout.LayoutParams.SCROLL_FLAG_ENTER_ALWAYS
+            appBarLayoutCoordinatorLayout.behavior = AppBarLayout.Behavior()
+        } else {
+            toolbarAppBarParams.scrollFlags = 0
+            appBarLayoutCoordinatorLayout.behavior = null
+        }
+
+        binding.appBarLayout.layoutParams = appBarLayoutCoordinatorLayout
+        binding.toolbar.layoutParams = toolbarAppBarParams
+    }
+
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
 
         val selectedFragment: Fragment? = when(item.itemId) {
-            R.id.menu_bottom_home -> homeFragment
-            R.id.menu_bottom_add -> photoFragment
-            R.id.menu_bottom_profile -> profileFragment
+            R.id.menu_bottom_home -> {
+                setScrollToolbar(true)
+                homeFragment
+            }
+            R.id.menu_bottom_add -> {
+                setScrollToolbar(false)
+                photoFragment
+            }
+            R.id.menu_bottom_profile -> {
+                setScrollToolbar(false)
+                profileFragment
+            }
             /*
             R.id.menu_bottom_favorite -> null,
             R.id.menu_bottom_search -> null,
