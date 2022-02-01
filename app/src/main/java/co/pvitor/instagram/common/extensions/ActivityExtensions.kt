@@ -6,6 +6,9 @@ import android.app.Activity
 import android.content.Context
 import android.view.View
 import android.view.inputmethod.InputMethodManager
+import androidx.annotation.IdRes
+import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.Fragment
 
 fun Activity.hideKeyboard() {
 
@@ -19,12 +22,30 @@ fun Activity.hideKeyboard() {
     }
 }
 
-fun Activity.onAnimationEnd(listener: () -> Unit): AnimatorListenerAdapter {
+fun AppCompatActivity.onAnimationEnd(listener: () -> Unit): AnimatorListenerAdapter {
     return object : AnimatorListenerAdapter() {
         override fun onAnimationEnd(animation: Animator?) {
             super.onAnimationEnd(animation)
             listener.invoke()
         }
     }
+}
+
+fun AppCompatActivity.replaceFragment(@IdRes fragment_id: Int, fragment: Fragment) {
+
+    val isFragmentAttached: Boolean = supportFragmentManager.findFragmentById(fragment_id) != null
+
+    val transaction = supportFragmentManager.beginTransaction()
+
+    if(isFragmentAttached) {
+        transaction.apply {
+            replace(fragment_id, fragment)
+            addToBackStack(null)
+        }
+    } else {
+        transaction.add(fragment_id, fragment)
+    }
+
+    transaction.commit()
 }
 

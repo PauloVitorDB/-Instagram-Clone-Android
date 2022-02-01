@@ -12,7 +12,6 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.FileProvider
 import androidx.fragment.app.Fragment
 import co.pvitor.instagram.R
-import co.pvitor.instagram.common.extensions.hideKeyboard
 import co.pvitor.instagram.common.view.CropperImageFragment
 import co.pvitor.instagram.common.view.CropperImageFragment.Companion.KEY_URI
 import co.pvitor.instagram.databinding.ActivityRegisterBinding

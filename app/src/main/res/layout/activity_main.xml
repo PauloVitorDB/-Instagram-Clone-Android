@@ -32,13 +32,11 @@
             />
         </com.google.android.material.appbar.AppBarLayout>
 
-        <fragment
+        <FrameLayout
             android:id="@+id/main_fragment"
             app:layout_behavior="@string/appbar_scrolling_view_behavior"
             android:layout_height="match_parent"
             android:layout_width="match_parent"
-            android:name="co.pvitor.instagram.home.view.HomeFragment"
-            tools:layout="@layout/fragment_home"
         />
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
