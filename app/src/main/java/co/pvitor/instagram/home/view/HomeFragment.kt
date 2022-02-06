@@ -1,23 +1,28 @@
 package co.pvitor.instagram.home.view
 
-import android.content.Context
 import android.os.Bundle
 import android.util.Log
 import android.view.*
-import androidx.annotation.DrawableRes
-import androidx.fragment.app.Fragment
+import androidx.annotation.MenuRes
+import androidx.annotation.StringRes
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import co.pvitor.instagram.R
+import co.pvitor.instagram.common.base.BaseFragment
+import co.pvitor.instagram.common.model.Post
 import co.pvitor.instagram.common.view.BottomSheetItem
 import co.pvitor.instagram.common.view.ModalBottomSheetDialog
 import co.pvitor.instagram.databinding.FragmentHomeBinding
-import co.pvitor.instagram.databinding.ItemPostBinding
+import co.pvitor.instagram.home.Home
+import co.pvitor.instagram.home.presentation.HomePresenter
+import com.google.android.material.snackbar.Snackbar
 
-class HomeFragment: Fragment() {
+class HomeFragment: BaseFragment<Home.Presenter, FragmentHomeBinding>(
+    R.layout.fragment_home,
+    FragmentHomeBinding::bind
+), Home.View {
 
-    private var _binding: FragmentHomeBinding? = null
-    private val binding get() = _binding!!
+    override lateinit var presenter: Home.Presenter
 
     private lateinit var modalBottomSheetDialog: ModalBottomSheetDialog
 
@@ -29,15 +34,11 @@ class HomeFragment: Fragment() {
         return inflater.inflate(R.layout.fragment_home, container, false)
     }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setHasOptionsMenu(true)
+    override fun setupPresenter() {
+        presenter = HomePresenter(this)
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-
-        super.onViewCreated(view, savedInstanceState)
-        _binding = FragmentHomeBinding.bind(view)
+    override fun setupOnViewCreated() {
 
         modalBottomSheetDialog = ModalBottomSheetDialog()
         modalBottomSheetDialog.addItems(
@@ -52,54 +53,30 @@ class HomeFragment: Fragment() {
             modalBottomSheetDialog.dismiss()
         }
 
-
         val recyclerViewPosts = binding.recyclerViewPosts
         recyclerViewPosts.layoutManager = LinearLayoutManager(requireContext(), RecyclerView.VERTICAL, false)
         recyclerViewPosts.adapter = PostAdapter(this, modalBottomSheetDialog)
+
     }
 
-    override fun onDestroy() {
-        _binding = null
-        super.onDestroy()
+    @MenuRes
+    override fun getMenu(): Int {
+        return R.menu.menu_bottom_navigation
     }
 
-    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        inflater.inflate(R.menu.menu_home, menu)
-        super.onCreateOptionsMenu(menu, inflater)
+    override fun showProgress(enabled: Boolean) {
+
+    }
+
+    override fun displayPosts(posts: List<Post>) {
+
+    }
+
+    override fun displayRequestFailure(@StringRes message: Int?) {
+        message?.let {
+            Snackbar.make(binding.root, getText(it), Snackbar.LENGTH_LONG).show()
+        }
     }
 
 }
 
-class PostAdapter(
-    private val context: Fragment,
-    private val modalBottomSheetDialog: ModalBottomSheetDialog
-): RecyclerView.Adapter<PostAdapter.PostItemViewHolder>() {
-
-    class PostItemViewHolder(
-        private val binding: ItemPostBinding,
-        private val onClick: (() -> Unit)?
-    ): RecyclerView.ViewHolder(binding.root) {
-        fun bind(@DrawableRes drawable: Int) {
-            binding.imageViewPostPhoto.setImageResource(R.drawable.insta_grid_photo)
-
-            binding.postSettings.setOnClickListener{
-                onClick?.invoke()
-            }
-
-        }
-    }
-
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PostItemViewHolder {
-        val binding = ItemPostBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-        return PostItemViewHolder(binding) {
-            modalBottomSheetDialog.show(context.childFragmentManager, "")
-        }
-    }
-
-    override fun onBindViewHolder(holder: PostItemViewHolder, position: Int) {
-        holder.bind(R.drawable.ic_insta_add)
-    }
-
-    override fun getItemCount(): Int = 20
-
-}

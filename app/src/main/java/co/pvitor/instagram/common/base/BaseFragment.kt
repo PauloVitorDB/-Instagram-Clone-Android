@@ -19,6 +19,7 @@ abstract class BaseFragment<P: BasePresenter, B>(
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setHasOptionsMenu(true)
+        setupPresenter()
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
@@ -26,8 +27,6 @@ abstract class BaseFragment<P: BasePresenter, B>(
         getMenu()?.let {
             inflater.inflate(it, menu)
         }
-
-        setupPresenter()
 
         super.onCreateOptionsMenu(menu, inflater)
     }

@@ -1,46 +1,42 @@
 package co.pvitor.instagram.profile.view
 
-import android.os.Bundle
 import android.util.Log
 import android.view.*
-import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import co.pvitor.instagram.R
+import co.pvitor.instagram.common.base.BaseFragment
+import co.pvitor.instagram.common.base.DependencyInjector
+import co.pvitor.instagram.common.model.Post
+import co.pvitor.instagram.common.model.UserAuth
 import co.pvitor.instagram.common.view.BottomSheetItem
 import co.pvitor.instagram.common.view.ModalBottomSheetDialog
 import co.pvitor.instagram.databinding.FragmentProfileBinding
-import co.pvitor.instagram.databinding.ItemGridPhotoBinding
+import co.pvitor.instagram.profile.Profile
+import co.pvitor.instagram.profile.presentation.ProfilePresenter
+import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.tabs.TabLayout
 
-class ProfileFragment: Fragment() {
+class ProfileFragment: BaseFragment<Profile.Presenter, FragmentProfileBinding>(
+    R.layout.fragment_profile,
+    FragmentProfileBinding::bind
+), Profile.View {
 
-    private var _binding: FragmentProfileBinding? = null
-    private val binding get() = _binding!!
+    override lateinit var presenter: Profile.Presenter
 
     private lateinit var modalBottomSheetDialog: ModalBottomSheetDialog
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        return inflater.inflate(R.layout.fragment_profile, container, false)
+    private val rvPostAdapter = PostGridAdapter()
+
+    override fun setupPresenter() {
+        presenter = ProfilePresenter(this, DependencyInjector.profileRepository())
     }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setHasOptionsMenu(true)
-    }
+    override fun setupOnViewCreated() {
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-
-        super.onViewCreated(view, savedInstanceState)
-        _binding = FragmentProfileBinding.bind(view)
-
-        val rvPhotoGrid: RecyclerView = binding.recyclerViewPhotoGrid
-        rvPhotoGrid.layoutManager = GridLayoutManager(requireContext(), 3)
-        rvPhotoGrid.adapter = PhotoGridAdapter()
+        binding.recyclerViewPhotoGrid.apply {
+            layoutManager = GridLayoutManager(requireContext(), 3)
+            adapter = rvPostAdapter
+        }
 
         modalBottomSheetDialog = ModalBottomSheetDialog()
         modalBottomSheetDialog.addItems(
@@ -73,16 +69,11 @@ class ProfileFragment: Fragment() {
             }
 
         })
+
     }
 
-    override fun onDestroy() {
-        _binding = null
-        super.onDestroy()
-    }
-
-    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        inflater.inflate(R.menu.menu_toolbar_profile, menu)
-        super.onCreateOptionsMenu(menu, inflater)
+    override fun getMenu(): Int {
+        return R.menu.menu_toolbar_profile
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
@@ -95,28 +86,36 @@ class ProfileFragment: Fragment() {
         }
     }
 
-}
-
-class PhotoGridAdapter(
-
-): RecyclerView.Adapter<PhotoGridAdapter.PhotoItemViewHolder>() {
-
-    class PhotoItemViewHolder(private val binding: ItemGridPhotoBinding): RecyclerView.ViewHolder(binding.root) {
-        fun bind(image: Int) {
-            binding.imageViewGridPhoto.setImageResource(image)
+    override fun displayRequestFailure(message: Int?) {
+        message?.let {
+            Snackbar.make(binding.root, getText(it), Snackbar.LENGTH_LONG).show()
         }
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PhotoItemViewHolder {
-        val binding = ItemGridPhotoBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-        return PhotoItemViewHolder(binding)
+    override fun displayUserProfile(user: UserAuth) {
+        user.apply {
+            binding.textViewPostsCounter.text = countPosts.toString()
+            binding.textViewFollowersCounter.text = countFollowers.toString()
+            binding.textViewFollowingCounter.text = countFollowing.toString()
+        }
     }
 
-    override fun onBindViewHolder(holder: PhotoItemViewHolder, position: Int) {
-        holder.bind(R.drawable.ic_insta_add)
+    override fun displayUserPosts(posts: List<Post>) {
+        rvPostAdapter.posts = posts
+        rvPostAdapter.notifyDataSetChanged()
+        binding.textViewEmptyUserPosts.visibility = View.GONE
+        binding.recyclerViewPhotoGrid.visibility = View.VISIBLE
     }
 
-    override fun getItemCount(): Int = 24
+    override fun displayEmptyPosts() {
+        binding.recyclerViewPhotoGrid.visibility = View.GONE
+        binding.textViewEmptyUserPosts.visibility = View.VISIBLE
+    }
 
+    override fun showProgress(enabled: Boolean) {
+        binding.progressBarHome.visibility = if(enabled) View.VISIBLE else View.GONE
+    }
 }
+
+
 

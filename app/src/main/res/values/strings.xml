@@ -56,4 +56,8 @@
     <string name="cancel">Cancelar</string>
     <string name="save">Salvar</string>
     <string name="session_user_not_found">Usuário não está logado</string>
+    <string name="counter_zero">0</string>
+    <string name="request_user_profile_fail">Falha ao buscar dados do usuário</string>
+    <string name="request_user_profile_posts_fail">Falha ao buscar posts de usuário</string>
+    <string name="empty_user_posts">Sem posts…</string>
 </resources>

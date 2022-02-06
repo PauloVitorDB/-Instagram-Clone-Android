@@ -3,6 +3,9 @@ package co.pvitor.instagram.common.base
 import co.pvitor.instagram.login.data.FakeDataSource
 import co.pvitor.instagram.login.data.LoginDataSource
 import co.pvitor.instagram.login.data.LoginRepository
+import co.pvitor.instagram.profile.data.ProfileDataSource
+import co.pvitor.instagram.profile.data.ProfileFakeDataSource
+import co.pvitor.instagram.profile.data.ProfileRepository
 import co.pvitor.instagram.register.data.FakeRegisterDataSource
 import co.pvitor.instagram.register.data.RegisterDataSource
 import co.pvitor.instagram.register.data.RegisterRepository
@@ -25,6 +28,11 @@ object DependencyInjector {
     fun registerRepository(): RegisterRepository {
         val dataSource: RegisterDataSource = FakeRegisterDataSource()
         return RegisterRepository(dataSource)
+    }
+
+    fun profileRepository(): ProfileRepository {
+        val dataSource: ProfileDataSource = ProfileFakeDataSource()
+        return ProfileRepository(dataSource)
     }
 
 }
