@@ -1,6 +1,7 @@
 package co.pvitor.instagram.main.view
 
 import android.os.Bundle
+import android.view.Menu
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
@@ -24,6 +25,12 @@ class MainActivity: AppCompatActivity(), NavigationBarView.OnItemSelectedListene
     private var profileFragment = ProfileFragment()
     private var photoFragment = PhotoFragment()
 
+    /*
+    * 1º Loading the fragments at the beginning
+    * Positive point: Fragments remain alive throughout the app run (Not reloaded using ".replace")
+    * Negative point: Fragments start as soon as the app starts, this can cause slowdowns as the resources of each fragment will load
+    * */
+
     override fun onCreate(savedInstanceState: Bundle?) {
 
         super.onCreate(savedInstanceState)
@@ -33,6 +40,17 @@ class MainActivity: AppCompatActivity(), NavigationBarView.OnItemSelectedListene
         setSupportActionBar(toolbar)
         supportActionBar?.let {
             title = ""
+        }
+
+        currentFragment = homeFragment
+
+        val fragmentId: Int = R.id.main_fragment
+
+        supportFragmentManager.beginTransaction().apply {
+            add(fragmentId, profileFragment, "profile").hide(profileFragment)
+            add(fragmentId, photoFragment, "photo").hide(photoFragment)
+            add(fragmentId, homeFragment, "home")
+            commit()
         }
 
         binding.bottomNavigationView.apply {
@@ -87,8 +105,11 @@ class MainActivity: AppCompatActivity(), NavigationBarView.OnItemSelectedListene
                 false
             } else {
                 selectedFragment.apply {
+                    currentFragment?.also {
+                        supportFragmentManager.beginTransaction().hide(it).show(selectedFragment).commit()
+                    }
                     currentFragment = this
-                    replaceFragment(R.id.main_fragment, selectedFragment)
+//                    replaceFragment(R.id.main_fragment, selectedFragment)
                 }
                 true
             }

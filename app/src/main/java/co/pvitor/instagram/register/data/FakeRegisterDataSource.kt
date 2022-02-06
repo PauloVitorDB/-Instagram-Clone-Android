@@ -1,7 +1,6 @@
 package co.pvitor.instagram.register.data
 
 import android.net.Uri
-import android.os.Looper
 import co.pvitor.instagram.R
 import co.pvitor.instagram.common.model.Database
 import co.pvitor.instagram.common.model.UserAuth
@@ -43,7 +42,8 @@ class FakeRegisterDataSource: RegisterDataSource {
                 UUID.randomUUID().toString(),
                 name,
                 email,
-                password
+                password,
+                0, 0, 0
             )
 
             val isUserRegistered = Database.usersAuth.add(userAuth)
