@@ -19,17 +19,8 @@ import com.google.android.material.navigation.NavigationBarView
 class MainActivity: AppCompatActivity(), NavigationBarView.OnItemSelectedListener {
 
     private lateinit var binding: ActivityMainBinding
-    private var currentFragment: Fragment? = null
 
-    private var homeFragment = HomeFragment()
-    private var profileFragment = ProfileFragment()
-    private var photoFragment = PhotoFragment()
-
-    /*
-    * 1º Loading the fragments at the beginning
-    * Positive point: Fragments remain alive throughout the app run (Not reloaded using ".replace")
-    * Negative point: Fragments start as soon as the app starts, this can cause slowdowns as the resources of each fragment will load
-    * */
+    private lateinit var fragmentSavedState: HashMap<String, Fragment.SavedState?>
 
     override fun onCreate(savedInstanceState: Bundle?) {
 
@@ -42,15 +33,10 @@ class MainActivity: AppCompatActivity(), NavigationBarView.OnItemSelectedListene
             title = ""
         }
 
-        currentFragment = homeFragment
-
-        val fragmentId: Int = R.id.main_fragment
-
-        supportFragmentManager.beginTransaction().apply {
-            add(fragmentId, profileFragment, "profile").hide(profileFragment)
-            add(fragmentId, photoFragment, "photo").hide(photoFragment)
-            add(fragmentId, homeFragment, "home")
-            commit()
+        if (savedInstanceState == null) {
+            fragmentSavedState = HashMap()
+        } else {
+           savedInstanceState.getSerializable("fragmentState") as HashMap<String, Fragment.SavedState?>
         }
 
         binding.bottomNavigationView.apply {
@@ -78,43 +64,49 @@ class MainActivity: AppCompatActivity(), NavigationBarView.OnItemSelectedListene
         binding.toolbar.layoutParams = toolbarAppBarParams
     }
 
+    // store in savedInstanceState
+    override fun onSaveInstanceState(outState: Bundle) {
+        outState.putSerializable("fragmentState", fragmentSavedState)
+        super.onSaveInstanceState(outState)
+    }
+
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
 
         val selectedFragment: Fragment? = when(item.itemId) {
+            R.id.menu_bottom_profile -> {
+                ProfileFragment()
+            }
             R.id.menu_bottom_home -> {
-                setScrollToolbar(true)
-                homeFragment
+                HomeFragment()
             }
             R.id.menu_bottom_add -> {
-                setScrollToolbar(false)
-                photoFragment
+                PhotoFragment()
             }
-            R.id.menu_bottom_profile -> {
-                setScrollToolbar(false)
-                profileFragment
-            }
-            /*
-            R.id.menu_bottom_favorite -> null,
-            R.id.menu_bottom_search -> null,
-            */
             else -> null
         }
 
-        if(selectedFragment != null) {
-            return if(selectedFragment == currentFragment) {
-                false
-            } else {
-                selectedFragment.apply {
-                    currentFragment?.also {
-                        supportFragmentManager.beginTransaction().hide(it).show(selectedFragment).commit()
-                    }
-                    currentFragment = this
-//                    replaceFragment(R.id.main_fragment, selectedFragment)
-                }
-                true
+        val fragmentAttached: Fragment? = supportFragmentManager.findFragmentById(R.id.main_fragment)
+
+        val selectedFragmentTag = selectedFragment?.javaClass?.simpleName
+
+        val isCurrentFragmentTagSelected = fragmentAttached?.tag.equals(selectedFragmentTag)
+
+        if(!isCurrentFragmentTagSelected) {
+            fragmentAttached?.let {
+                fragmentSavedState.put(
+                    it.tag!!,
+                    supportFragmentManager.saveFragmentInstanceState(it)
+                )
             }
         }
 
+        selectedFragment?.setInitialSavedState(fragmentSavedState[selectedFragmentTag])
+        selectedFragment?.let {
+            supportFragmentManager.beginTransaction()
+                .replace(R.id.main_fragment, it, selectedFragmentTag)
+                .addToBackStack(null)
+                .commit()
+        }
 
         return true
     }

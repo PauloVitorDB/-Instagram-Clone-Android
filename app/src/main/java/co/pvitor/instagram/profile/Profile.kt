@@ -1,5 +1,6 @@
 package co.pvitor.instagram.profile
 
+import android.os.Bundle
 import androidx.annotation.StringRes
 import co.pvitor.instagram.common.base.BasePresenter
 import co.pvitor.instagram.common.base.BaseView
@@ -17,6 +18,7 @@ interface Profile {
     }
 
     interface Presenter: BasePresenter {
+        var state: Bundle // move to BasePresenter if it´s not test
         fun fetchProfileUser()
         fun fetchProfilePosts()
     }

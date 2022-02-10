@@ -1,5 +1,6 @@
 package co.pvitor.instagram.profile.view
 
+import android.os.Bundle
 import android.util.Log
 import android.view.*
 import androidx.recyclerview.widget.GridLayoutManager
@@ -13,6 +14,8 @@ import co.pvitor.instagram.common.view.ModalBottomSheetDialog
 import co.pvitor.instagram.databinding.FragmentProfileBinding
 import co.pvitor.instagram.profile.Profile
 import co.pvitor.instagram.profile.presentation.ProfilePresenter
+import co.pvitor.instagram.profile.presentation.ProfilePresenter.Companion.KEY_USER_POSTS
+import co.pvitor.instagram.profile.presentation.ProfilePresenter.Companion.KEY_USER_PROFILE
 import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.tabs.TabLayout
 
@@ -29,6 +32,32 @@ class ProfileFragment: BaseFragment<Profile.Presenter, FragmentProfileBinding>(
 
     override fun setupPresenter() {
         presenter = ProfilePresenter(this, DependencyInjector.profileRepository())
+    }
+
+    override fun onViewStateRestored(savedInstanceState: Bundle?) {
+        savedInstanceState?.let {
+
+            it.getParcelable<UserAuth>(KEY_USER_PROFILE)?.let { userAuth ->
+                displayUserProfile(userAuth)
+             }
+
+            val postList = it.getParcelableArrayList<Post>(KEY_USER_POSTS)
+            postList?.let {
+                if(postList.size > 1) {
+                    displayUserPosts(postList)
+                } else {
+                    displayEmptyPosts()
+                }
+            }
+
+        }
+
+        super.onViewStateRestored(savedInstanceState)
+    }
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        outState.putBundle("state", presenter.state)
+        super.onSaveInstanceState(outState)
     }
 
     override fun setupOnViewCreated() {
