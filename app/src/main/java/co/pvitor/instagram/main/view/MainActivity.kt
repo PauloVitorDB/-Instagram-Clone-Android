@@ -88,7 +88,6 @@ class MainActivity: AppCompatActivity(), NavigationBarView.OnItemSelectedListene
         val fragmentAttached: Fragment? = supportFragmentManager.findFragmentById(R.id.main_fragment)
 
         val selectedFragmentTag = selectedFragment?.javaClass?.simpleName
-
         val isCurrentFragmentTagSelected = fragmentAttached?.tag.equals(selectedFragmentTag)
 
         if(!isCurrentFragmentTagSelected) {

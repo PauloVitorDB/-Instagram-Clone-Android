@@ -36,7 +36,7 @@ class ProfileFakeDataSource: ProfileDataSource {
             if(posts != null) {
                 callback.onSuccess(posts.toList())
             } else {
-                callback.onFailure()
+                 callback.onSuccess(emptyList())
             }
 
             callback.onComplete()

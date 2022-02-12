@@ -1,6 +1,5 @@
 package co.pvitor.instagram.profile
 
-import android.os.Bundle
 import androidx.annotation.StringRes
 import co.pvitor.instagram.common.base.BasePresenter
 import co.pvitor.instagram.common.base.BaseView
@@ -17,10 +16,18 @@ interface Profile {
         fun displayRequestFailure(@StringRes message: Int?)
     }
 
-    interface Presenter: BasePresenter {
-        var state: Bundle // move to BasePresenter if it´s not test
-        fun fetchProfileUser()
-        fun fetchProfilePosts()
+    interface Presenter: StatefulPresenter<State> {
+
+    }
+
+    interface StatefulPresenter<S: State>: BasePresenter {
+        fun getState(): S
+        fun subscribe(state: S?)
+    }
+
+    interface State {
+        fun fetchProfileUser(): UserAuth?
+        fun fetchProfilePosts(): List<Post>?
     }
     
 }
