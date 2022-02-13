@@ -16,18 +16,9 @@ interface Profile {
         fun displayRequestFailure(@StringRes message: Int?)
     }
 
-    interface Presenter: StatefulPresenter<State> {
-
+    interface Presenter: BasePresenter {
+        fun fetchProfileUser()
+        fun fetchProfilePosts()
     }
 
-    interface StatefulPresenter<S: State>: BasePresenter {
-        fun getState(): S
-        fun subscribe(state: S?)
-    }
-
-    interface State {
-        fun fetchProfileUser(): UserAuth?
-        fun fetchProfilePosts(): List<Post>?
-    }
-    
 }

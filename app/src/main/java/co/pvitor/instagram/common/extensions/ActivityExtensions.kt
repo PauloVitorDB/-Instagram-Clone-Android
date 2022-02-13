@@ -31,7 +31,7 @@ fun AppCompatActivity.onAnimationEnd(listener: () -> Unit): AnimatorListenerAdap
     }
 }
 
-fun AppCompatActivity.replaceFragment(@IdRes fragment_id: Int, fragment: Fragment) {
+fun AppCompatActivity.replaceFragment(@IdRes fragment_id: Int, fragment: Fragment, fragmentTag: String?) {
 
     val isFragmentAttached: Boolean = supportFragmentManager.findFragmentById(fragment_id) != null
 
@@ -39,11 +39,11 @@ fun AppCompatActivity.replaceFragment(@IdRes fragment_id: Int, fragment: Fragmen
 
     if(isFragmentAttached) {
         transaction.apply {
-            replace(fragment_id, fragment)
+            replace(fragment_id, fragment, fragmentTag)
             addToBackStack(null)
         }
     } else {
-        transaction.add(fragment_id, fragment)
+        transaction.add(fragment_id, fragment, fragmentTag)
     }
 
     transaction.commit()

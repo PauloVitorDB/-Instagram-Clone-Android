@@ -1,6 +1,5 @@
 package co.pvitor.instagram.profile.view
 
-import android.os.Bundle
 import android.util.Log
 import android.view.*
 import androidx.recyclerview.widget.GridLayoutManager
@@ -14,9 +13,6 @@ import co.pvitor.instagram.common.view.ModalBottomSheetDialog
 import co.pvitor.instagram.databinding.FragmentProfileBinding
 import co.pvitor.instagram.profile.Profile
 import co.pvitor.instagram.profile.presentation.ProfilePresenter
-import co.pvitor.instagram.profile.presentation.ProfilePresenter.Companion.KEY_USER_POSTS
-import co.pvitor.instagram.profile.presentation.ProfilePresenter.Companion.KEY_USER_PROFILE
-import co.pvitor.instagram.profile.presentation.ProfileState
 import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.tabs.TabLayout
 
@@ -31,48 +27,8 @@ class ProfileFragment: BaseFragment<Profile.Presenter, FragmentProfileBinding>(
 
     private val rvPostAdapter = PostGridAdapter()
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-
-        super.onViewCreated(view, savedInstanceState)
-
-        presenter.subscribe(
-            if(savedInstanceState != null) {
-                ProfileState(
-                    savedInstanceState.getParcelableArrayList<Post>(KEY_USER_POSTS),
-                    savedInstanceState.getParcelable<UserAuth>(KEY_USER_PROFILE)
-                )
-            } else {
-                null
-            }
-        )
-    }
-
     override fun setupPresenter() {
         presenter = ProfilePresenter(this, DependencyInjector.profileRepository())
-    }
-
-    override fun onViewStateRestored(savedInstanceState: Bundle?) {
-        super.onViewStateRestored(savedInstanceState)
-    }
-
-    override fun onSaveInstanceState(outState: Bundle) {
-
-        val currentPresenterState: Profile.State = presenter.getState()
-
-        outState.putParcelable(KEY_USER_PROFILE, currentPresenterState.fetchProfileUser())
-        currentPresenterState.apply {
-            fetchProfileUser()?.let {
-                outState.putParcelable(KEY_USER_PROFILE, it)
-            }
-
-            fetchProfilePosts()?.let {
-                if(it.isNotEmpty()) {
-                    outState.putParcelableArrayList(KEY_USER_POSTS, it as ArrayList<Post>)
-                }
-            }
-        }
-
-        super.onSaveInstanceState(outState)
     }
 
     override fun setupOnViewCreated() {
@@ -114,6 +70,7 @@ class ProfileFragment: BaseFragment<Profile.Presenter, FragmentProfileBinding>(
 
         })
 
+        presenter.fetchProfileUser()
     }
 
     override fun getMenu(): Int {
@@ -143,6 +100,7 @@ class ProfileFragment: BaseFragment<Profile.Presenter, FragmentProfileBinding>(
             binding.textViewFollowersCounter.text = countFollowers.toString()
             binding.textViewFollowingCounter.text = countFollowing.toString()
         }
+        presenter.fetchProfilePosts()
     }
 
     override fun displayUserPosts(posts: List<Post>) {

@@ -1,9 +1,5 @@
 package co.pvitor.instagram.common.model
 
-import android.os.Parcelable
-import kotlinx.parcelize.Parcelize
-
-@Parcelize
 data class UserAuth(
     val uuid: String,
     val name: String,
@@ -12,4 +8,4 @@ data class UserAuth(
     val countPosts: Int,
     val countFollowers: Int,
     val countFollowing: Int
-) : Parcelable
+)

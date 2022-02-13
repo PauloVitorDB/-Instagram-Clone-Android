@@ -20,7 +20,7 @@ class MainActivity: AppCompatActivity(), NavigationBarView.OnItemSelectedListene
 
     private lateinit var binding: ActivityMainBinding
 
-    private lateinit var fragmentSavedState: HashMap<String, Fragment.SavedState?>
+    private var currentFragment: Fragment? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
 
@@ -31,12 +31,6 @@ class MainActivity: AppCompatActivity(), NavigationBarView.OnItemSelectedListene
         setSupportActionBar(toolbar)
         supportActionBar?.let {
             title = ""
-        }
-
-        if (savedInstanceState == null) {
-            fragmentSavedState = HashMap()
-        } else {
-           savedInstanceState.getSerializable("fragmentState") as HashMap<String, Fragment.SavedState?>
         }
 
         binding.bottomNavigationView.apply {
@@ -64,47 +58,36 @@ class MainActivity: AppCompatActivity(), NavigationBarView.OnItemSelectedListene
         binding.toolbar.layoutParams = toolbarAppBarParams
     }
 
-    // store in savedInstanceState
-    override fun onSaveInstanceState(outState: Bundle) {
-        outState.putSerializable("fragmentState", fragmentSavedState)
-        super.onSaveInstanceState(outState)
-    }
-
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
 
         val selectedFragment: Fragment? = when(item.itemId) {
             R.id.menu_bottom_profile -> {
+                setScrollToolbar(false)
                 ProfileFragment()
             }
             R.id.menu_bottom_home -> {
+                setScrollToolbar(true)
                 HomeFragment()
             }
             R.id.menu_bottom_add -> {
+                setScrollToolbar(false)
                 PhotoFragment()
             }
             else -> null
         }
 
-        val fragmentAttached: Fragment? = supportFragmentManager.findFragmentById(R.id.main_fragment)
+        if(selectedFragment != null) {
 
-        val selectedFragmentTag = selectedFragment?.javaClass?.simpleName
-        val isCurrentFragmentTagSelected = fragmentAttached?.tag.equals(selectedFragmentTag)
+            val fragmentTag = selectedFragment.javaClass.simpleName
 
-        if(!isCurrentFragmentTagSelected) {
-            fragmentAttached?.let {
-                fragmentSavedState.put(
-                    it.tag!!,
-                    supportFragmentManager.saveFragmentInstanceState(it)
-                )
+            return if(currentFragment?.tag.equals(fragmentTag)) {
+                false
+            } else {
+                currentFragment = selectedFragment
+                replaceFragment(R.id.main_fragment, selectedFragment, fragmentTag)
+                true
             }
-        }
 
-        selectedFragment?.setInitialSavedState(fragmentSavedState[selectedFragmentTag])
-        selectedFragment?.let {
-            supportFragmentManager.beginTransaction()
-                .replace(R.id.main_fragment, it, selectedFragmentTag)
-                .addToBackStack(null)
-                .commit()
         }
 
         return true
