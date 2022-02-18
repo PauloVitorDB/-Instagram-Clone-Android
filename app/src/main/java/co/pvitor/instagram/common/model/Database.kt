@@ -9,6 +9,7 @@ object Database {
     var sessionUserAuth: UserAuth? = null
     var userPhoto: UserPhoto? = null
     var posts = hashMapOf<String, Set<Post>>()
+    var feedList = hashMapOf<String, Set<Post>>()
 
     init {
 
@@ -16,6 +17,7 @@ object Database {
         usersAuth.add(UserAuth(UUID.randomUUID().toString(), "userB", "userB@test.com", "12345678", 0, 0,0))
 
         sessionUserAuth = usersAuth.first()
+
     }
 
 }

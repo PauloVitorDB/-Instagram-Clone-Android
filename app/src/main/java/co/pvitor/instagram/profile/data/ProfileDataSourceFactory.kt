@@ -15,7 +15,7 @@ class ProfileDataSourceFactory(
     fun createFromUser(): ProfileDataSource {
 
         if(profileCache.isCached()) {
-            return ProfileLocalDataSource(profileCache, postsCache)
+            return createLocalDataSource()
         }
 
         return ProfileFakeDataSource()
@@ -24,7 +24,7 @@ class ProfileDataSourceFactory(
     fun createFromPosts(): ProfileDataSource {
 
         if(postsCache.isCached()) {
-            return ProfileLocalDataSource(profileCache, postsCache)
+            return createLocalDataSource()
         }
 
         return ProfileFakeDataSource()

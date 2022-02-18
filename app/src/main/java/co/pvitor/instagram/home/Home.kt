@@ -7,14 +7,15 @@ import co.pvitor.instagram.common.model.Post
 
 interface Home {
 
-    interface View: BaseView<Home.Presenter> {
-        fun showProgress(enabled: Boolean)
-        fun displayRequestFailure(@StringRes message: Int?)
-        fun displayPosts(posts: List<Post>)
+    interface Presenter: BasePresenter {
+        fun displayPosts()
     }
 
-    interface Presenter: BasePresenter {
-        fun fetchHomePosts()
+    interface View: BaseView<Home.Presenter> {
+        fun displayEmptyFeed()
+        fun displayFeed(feedList: List<Post>)
+        fun displayError(@StringRes message: Int?)
+        fun showProgress(enabled: Boolean)
     }
 
 }
