@@ -44,7 +44,7 @@ class ModalBottomSheetDialog: BottomSheetDialogFragment() {
             )
 
             textView.apply {
-                id = bottomSheetItem.textViewRes
+                id = bottomSheetItem.textViewRes.toInt()
                 text = context?.getText(bottomSheetItem.textViewRes)
                 setOnClickListener(itemListener)
             }
