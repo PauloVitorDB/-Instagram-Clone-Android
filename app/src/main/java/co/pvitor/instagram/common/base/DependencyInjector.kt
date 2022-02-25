@@ -1,5 +1,7 @@
 package co.pvitor.instagram.common.base
 
+import co.pvitor.instagram.add.data.AddDataSourceFactory
+import co.pvitor.instagram.add.data.AddRepository
 import co.pvitor.instagram.home.data.FeedMemoryCache
 import co.pvitor.instagram.home.data.HomeDataSourceFactory
 import co.pvitor.instagram.home.data.HomeRepository
@@ -39,6 +41,11 @@ object DependencyInjector {
     fun homeRepository(): HomeRepository {
         val dataSourceFactory = HomeDataSourceFactory(FeedMemoryCache)
         return HomeRepository(dataSourceFactory)
+    }
+
+    fun addRepository(): AddRepository {
+        val dataSourceFactory = AddDataSourceFactory()
+        return AddRepository(dataSourceFactory)
     }
 
 }

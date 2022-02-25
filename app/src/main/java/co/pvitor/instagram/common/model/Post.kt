@@ -5,8 +5,8 @@ import java.sql.Timestamp
 
 data class Post(
     val uuid: String,
-    val uri: Int,
+    val uri: Uri,
     val caption: String,
-    val timestamp: Timestamp?,
+    val timestamp: Long,
     val userAuth: UserAuth
 )

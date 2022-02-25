@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tool="http://schemas.android.com/tools">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+    >
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar_add"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:minHeight="?attr/actionBarSize"
+            app:menu="@menu/menu_add_share"
+        />
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="@dimen/activity_vertical_margin_small"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    >
+
+        <ImageView
+            android:id="@+id/image_view_post"
+            android:layout_width="64dp"
+            android:layout_height="64dp"
+            android:layout_marginStart="@dimen/activity_horizontal_margin_small"
+            android:contentDescription="@null"
+        />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/text_input_layout_caption"
+            app:hintEnabled="false"
+            style="@style/Theme.Instagram.FormEditTextInput"
+        >
+          <com.google.android.material.textfield.TextInputEditText
+              android:id="@+id/text_input_edit_text_caption"
+              android:hint="@string/hint_caption"
+              style="@style/Theme.Instagram.FormEditText"
+          />
+        </com.google.android.material.textfield.TextInputLayout>
+
+    </LinearLayout>
+
+    <ProgressBar
+        android:id="@+id/progress_bar_add"
+        style="@style/Theme.Instagram.ProgressBarDefault"
+        tool:visibility="visible"
+    />
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

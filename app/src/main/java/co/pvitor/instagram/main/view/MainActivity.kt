@@ -1,14 +1,13 @@
 package co.pvitor.instagram.main.view
 
 import android.os.Bundle
-import android.view.Menu
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.fragment.app.Fragment
 import co.pvitor.instagram.R
-import co.pvitor.instagram.camera.view.PhotoFragment
+import co.pvitor.instagram.add.view.AddFragment
 import co.pvitor.instagram.common.extensions.replaceFragment
 import co.pvitor.instagram.databinding.ActivityMainBinding
 import co.pvitor.instagram.home.view.HomeFragment
@@ -71,7 +70,7 @@ class MainActivity: AppCompatActivity(), NavigationBarView.OnItemSelectedListene
             }
             R.id.menu_bottom_add -> {
                 setScrollToolbar(false)
-                PhotoFragment()
+                AddFragment()
             }
             else -> null
         }

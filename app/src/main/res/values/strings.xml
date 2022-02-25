@@ -62,4 +62,8 @@
     <string name="empty_user_posts">Sem posts…</string>
     <string name="error_feed">Erro ao buscar públicações…</string>
     <string name="empty_feed">Lista de postagem vázia…</string>
+    <string name="gallery">Galeria</string>
+    <string name="permission_camera_denied">Permissão de acesso a câmera não concedida</string>
+    <string name="hint_caption">Descrição</string>
+    <string name="share">Compartilhar</string>
 </resources>

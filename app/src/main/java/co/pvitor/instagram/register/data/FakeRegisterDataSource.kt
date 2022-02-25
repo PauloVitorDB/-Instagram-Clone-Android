@@ -49,6 +49,10 @@ class FakeRegisterDataSource: RegisterDataSource {
             val isUserRegistered = Database.usersAuth.add(userAuth)
             Database.sessionUserAuth = userAuth
 
+            Database.posts[userAuth.uuid] = mutableSetOf()
+            Database.feedList[userAuth.uuid] = mutableSetOf()
+            Database.followers[userAuth.uuid] = setOf()
+
             if(!isUserRegistered) {
                 callback.onFailure(R.string.register_fail)
             } else {

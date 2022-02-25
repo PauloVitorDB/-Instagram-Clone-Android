@@ -10,28 +10,29 @@ object Database {
 
     var sessionUserAuth: UserAuth? = null
     var userPhoto: UserPhoto? = null
-    var posts = hashMapOf<String, Set<Post>>()
-    var feedList = hashMapOf<String, Set<Post>?>()
+    var posts = hashMapOf<String, MutableSet<Post>>()
+    var feedList = hashMapOf<String, MutableSet<Post>?>()
+    val followers = hashMapOf<String, Set<String>>()
 
     private var uuidLoggedTest: String = UUID.randomUUID().toString()
-    var setPostFeedList: Set<Post>? = null
 
     init {
 
-        usersAuth.add(UserAuth(uuidLoggedTest, "userA", "userA@test.com", "12345678", 0, 0, 0))
-        usersAuth.add(UserAuth(UUID.randomUUID().toString(), "userB", "userB@test.com", "12345678", 0, 0,0))
+        val userA = UserAuth(uuidLoggedTest, "userA", "userA@test.com", "12345678", 0, 0, 0)
+        val userB = UserAuth(UUID.randomUUID().toString(), "userB", "userB@test.com", "12345678", 0, 0,0)
 
-        setPostFeedList = setOf(Post(
-            uuidLoggedTest,
-            R.drawable.insta_grid_photo,
-            "",
-            null,
-            usersAuth.last()
-        ))
+        usersAuth.add(userA)
+        usersAuth.add(userB)
 
-        feedList[uuidLoggedTest] = setPostFeedList
+        followers[userA.uuid] = hashSetOf()
+        posts[userA.uuid] = mutableSetOf()
+        feedList[userA.uuid] = mutableSetOf()
+
+        followers[userB.uuid] = hashSetOf()
+        posts[userB.uuid] = mutableSetOf()
+        feedList[userB.uuid] = mutableSetOf()
+
         sessionUserAuth = usersAuth.first()
-
 
     }
 
