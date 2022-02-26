@@ -1,4 +1,4 @@
-package co.pvitor.instagram.add.view
+package co.pvitor.instagram.post.view
 
 import android.Manifest
 import android.app.Activity.RESULT_OK
@@ -17,6 +17,7 @@ import androidx.fragment.app.setFragmentResultListener
 import androidx.viewpager2.widget.ViewPager2
 import co.pvitor.instagram.R
 import co.pvitor.instagram.add.Add
+import co.pvitor.instagram.add.view.AddActivity
 import co.pvitor.instagram.databinding.FragmentAddBinding
 import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.tabs.TabLayoutMediator
@@ -26,7 +27,10 @@ class AddFragment: Fragment(R.layout.fragment_add)  {
 
     companion object {
 
-        private const val REQUIRED_PERMISSION = Manifest.permission.CAMERA
+        private val REQUIRED_PERMISSIONS = arrayOf(
+            Manifest.permission.CAMERA,
+            Manifest.permission.READ_EXTERNAL_STORAGE
+        )
 
         const val CAMERA_KEY = "camera_key"
         const val START_CAMERA_KEY = "startCamera"
@@ -112,21 +116,32 @@ class AddFragment: Fragment(R.layout.fragment_add)  {
         if(allPermissionGranted()) {
             startCamera()
         } else {
-            requirePermission.launch(REQUIRED_PERMISSION)
+            requirePermission.launch(REQUIRED_PERMISSIONS)
         }
     }
     private fun allPermissionGranted(): Boolean {
-        return ContextCompat.checkSelfPermission(requireContext(), REQUIRED_PERMISSION) == PackageManager.PERMISSION_GRANTED
+
+        var hasAllPermissionGranted: Boolean = true
+        for (permission in REQUIRED_PERMISSIONS) {
+            if(ContextCompat.checkSelfPermission(requireContext(), permission) != PackageManager.PERMISSION_GRANTED) {
+                hasAllPermissionGranted = false
+                break;
+            }
+        }
+
+        return hasAllPermissionGranted
     }
 
     private fun startCamera() {
-        setFragmentResult(CAMERA_KEY, bundleOf(
+        setFragmentResult(
+            CAMERA_KEY, bundleOf(
             START_CAMERA_KEY to true
         ))
     }
 
-    private val requirePermission = registerForActivityResult(ActivityResultContracts.RequestPermission()) { granted ->
-        if(granted) {
+    private val requirePermission = registerForActivityResult(ActivityResultContracts.RequestMultiplePermissions()) {
+
+        if(allPermissionGranted()) {
             startCamera()
         } else {
             Snackbar.make(binding.root, getText(R.string.permission_camera_denied), Snackbar.LENGTH_LONG).show()

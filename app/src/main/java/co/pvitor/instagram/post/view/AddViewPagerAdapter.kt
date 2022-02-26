@@ -1,4 +1,4 @@
-package co.pvitor.instagram.add.view
+package co.pvitor.instagram.post.view
 
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity

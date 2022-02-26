@@ -8,7 +8,7 @@ import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.fragment.app.Fragment
 import co.pvitor.instagram.R
 import co.pvitor.instagram.add.Add
-import co.pvitor.instagram.add.view.AddFragment
+import co.pvitor.instagram.post.view.AddFragment
 import co.pvitor.instagram.common.extensions.replaceFragment
 import co.pvitor.instagram.databinding.ActivityMainBinding
 import co.pvitor.instagram.home.view.HomeFragment

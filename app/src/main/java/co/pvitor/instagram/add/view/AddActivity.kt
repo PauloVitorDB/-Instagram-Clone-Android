@@ -9,7 +9,7 @@ import androidx.appcompat.app.AppCompatActivity
 import co.pvitor.instagram.R
 import co.pvitor.instagram.add.Add
 import co.pvitor.instagram.add.presentation.AddPresenter
-import co.pvitor.instagram.add.view.AddFragment.Companion.URI_KEY
+import co.pvitor.instagram.post.view.AddFragment.Companion.URI_KEY
 import co.pvitor.instagram.common.base.DependencyInjector
 import co.pvitor.instagram.databinding.ActivityAddBinding
 import com.google.android.material.snackbar.Snackbar

@@ -66,4 +66,6 @@
     <string name="permission_camera_denied">Permissão de acesso a câmera não concedida</string>
     <string name="hint_caption">Descrição</string>
     <string name="share">Compartilhar</string>
+    <string name="error_fetch_gallery_pictures">Erro ao buscar as fotos da galeria</string>
+    <string name="empty_device_gallery">Não há fotos na galeria...</string>
 </resources>

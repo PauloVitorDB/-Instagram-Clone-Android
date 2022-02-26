@@ -1,4 +1,4 @@
-package co.pvitor.instagram.add.view
+package co.pvitor.instagram.post.view
 
 import android.net.Uri
 import android.os.Bundle
@@ -16,10 +16,10 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.setFragmentResult
 import androidx.fragment.app.setFragmentResultListener
 import co.pvitor.instagram.R
-import co.pvitor.instagram.add.view.AddFragment.Companion.START_CAMERA_KEY
-import co.pvitor.instagram.add.view.AddFragment.Companion.CAMERA_KEY
-import co.pvitor.instagram.add.view.AddFragment.Companion.URI_KEY
-import co.pvitor.instagram.add.view.AddFragment.Companion.URI_SAVED_KEY
+import co.pvitor.instagram.post.view.AddFragment.Companion.START_CAMERA_KEY
+import co.pvitor.instagram.post.view.AddFragment.Companion.CAMERA_KEY
+import co.pvitor.instagram.post.view.AddFragment.Companion.URI_KEY
+import co.pvitor.instagram.post.view.AddFragment.Companion.URI_SAVED_KEY
 import co.pvitor.instagram.common.util.Files
 import co.pvitor.instagram.databinding.FragmentCameraBinding
 
