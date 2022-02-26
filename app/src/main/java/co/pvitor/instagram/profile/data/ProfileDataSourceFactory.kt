@@ -1,11 +1,12 @@
 package co.pvitor.instagram.profile.data
 
+import co.pvitor.instagram.common.model.LocalCache
 import co.pvitor.instagram.common.model.Post
 import co.pvitor.instagram.common.model.UserAuth
 
 class ProfileDataSourceFactory(
-    private val profileCache: ProfileCache<UserAuth>,
-    private val postsCache: ProfileCache<List<Post>>
+    private val profileCache: LocalCache<UserAuth>,
+    private val postsCache: LocalCache<List<Post>>
 ) {
 
     fun createLocalDataSource() : ProfileDataSource {

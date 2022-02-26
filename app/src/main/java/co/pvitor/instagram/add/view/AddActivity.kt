@@ -70,6 +70,7 @@ class AddActivity: AppCompatActivity(), Add.View {
         message?.let {
             Snackbar.make(binding.root, getText(it), Snackbar.LENGTH_SHORT).show()
         }
+        setResult(RESULT_CANCELED)
         finish()
     }
 
@@ -77,6 +78,7 @@ class AddActivity: AppCompatActivity(), Add.View {
         message?.let {
             Snackbar.make(binding.root, getText(it), Snackbar.LENGTH_SHORT).show()
         }
+        setResult(RESULT_OK)
         finish()
     }
 

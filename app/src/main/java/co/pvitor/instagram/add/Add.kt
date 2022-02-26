@@ -17,4 +17,8 @@ interface Add {
         fun createPost(uri: Uri, caption: String)
     }
 
+    interface ResultListener {
+        fun onPostCreated()
+    }
+
 }

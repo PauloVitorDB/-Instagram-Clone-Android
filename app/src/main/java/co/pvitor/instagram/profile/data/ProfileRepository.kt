@@ -8,6 +8,11 @@ class ProfileRepository(
     private val profileDataSourceFactory: ProfileDataSourceFactory
 ) {
 
+    fun clearCache() {
+        val localDataSource = profileDataSourceFactory.createLocalDataSource()
+        localDataSource.putPostList(null)
+    }
+
     fun fetchProfileUser(callback: RequestCallback<UserAuth>) {
 
         val localDataSource: ProfileDataSource = profileDataSourceFactory.createLocalDataSource()

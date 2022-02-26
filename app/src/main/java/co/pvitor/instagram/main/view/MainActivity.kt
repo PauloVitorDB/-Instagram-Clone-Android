@@ -7,6 +7,7 @@ import androidx.appcompat.widget.Toolbar
 import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.fragment.app.Fragment
 import co.pvitor.instagram.R
+import co.pvitor.instagram.add.Add
 import co.pvitor.instagram.add.view.AddFragment
 import co.pvitor.instagram.common.extensions.replaceFragment
 import co.pvitor.instagram.databinding.ActivityMainBinding
@@ -15,11 +16,15 @@ import co.pvitor.instagram.profile.view.ProfileFragment
 import com.google.android.material.appbar.AppBarLayout
 import com.google.android.material.navigation.NavigationBarView
 
-class MainActivity: AppCompatActivity(), NavigationBarView.OnItemSelectedListener {
+class MainActivity: AppCompatActivity(), NavigationBarView.OnItemSelectedListener, Add.ResultListener {
 
     private lateinit var binding: ActivityMainBinding
 
     private var currentFragment: Fragment? = null
+
+    private lateinit var homeFragment:  HomeFragment
+    private lateinit var profileFragment: ProfileFragment
+    private lateinit var addFragment: AddFragment
 
     override fun onCreate(savedInstanceState: Bundle?) {
 
@@ -36,6 +41,10 @@ class MainActivity: AppCompatActivity(), NavigationBarView.OnItemSelectedListene
             setOnItemSelectedListener(this@MainActivity)
             selectedItemId = R.id.menu_bottom_home
         }
+
+        homeFragment = HomeFragment()
+        profileFragment = ProfileFragment()
+        addFragment = AddFragment()
 
         setContentView(binding.root)
     }
@@ -62,15 +71,15 @@ class MainActivity: AppCompatActivity(), NavigationBarView.OnItemSelectedListene
         val selectedFragment: Fragment? = when(item.itemId) {
             R.id.menu_bottom_profile -> {
                 setScrollToolbar(false)
-                ProfileFragment()
+                profileFragment
             }
             R.id.menu_bottom_home -> {
                 setScrollToolbar(true)
-                HomeFragment()
+                homeFragment
             }
             R.id.menu_bottom_add -> {
                 setScrollToolbar(false)
-                AddFragment()
+                addFragment
             }
             else -> null
         }
@@ -90,6 +99,17 @@ class MainActivity: AppCompatActivity(), NavigationBarView.OnItemSelectedListene
         }
 
         return true
+    }
+
+    override fun onPostCreated() {
+        homeFragment.presenter.clear()
+
+        val fragmentHomeHasInitialized: Boolean = supportFragmentManager.findFragmentByTag(profileFragment.javaClass.simpleName) != null
+        if(fragmentHomeHasInitialized) {
+            profileFragment.presenter.clear()
+        }
+
+        binding.bottomNavigationView.selectedItemId = R.id.menu_bottom_home
     }
 
 }

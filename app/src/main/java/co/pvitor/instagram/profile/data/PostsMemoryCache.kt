@@ -1,12 +1,13 @@
 package co.pvitor.instagram.profile.data
 
+import co.pvitor.instagram.common.model.LocalCache
 import co.pvitor.instagram.common.model.Post
 
-object PostsMemoryCache: ProfileCache<List<Post>> {
+object PostsMemoryCache: LocalCache<List<Post>> {
 
     private var postsList: List<Post>? = null
 
-    override fun get(key: String) : List<Post>? {
+    override fun get(key: String?) : List<Post>? {
         return postsList
     }
 
@@ -14,7 +15,7 @@ object PostsMemoryCache: ProfileCache<List<Post>> {
         return postsList != null
     }
 
-    override fun put(data: List<Post>) {
+    override fun set(data: List<Post>?) {
         postsList = data
     }
 }

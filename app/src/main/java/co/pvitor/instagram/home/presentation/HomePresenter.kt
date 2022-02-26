@@ -39,6 +39,10 @@ class HomePresenter(
 
     }
 
+    override fun clear() {
+        repository.clearCache()
+    }
+
     override fun onDestroy() {
         _view = null
     }

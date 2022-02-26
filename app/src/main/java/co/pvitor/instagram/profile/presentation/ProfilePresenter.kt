@@ -64,4 +64,7 @@ class ProfilePresenter(
         _view = null
     }
 
+    override fun clear() {
+        repository.clearCache()
+    }
 }

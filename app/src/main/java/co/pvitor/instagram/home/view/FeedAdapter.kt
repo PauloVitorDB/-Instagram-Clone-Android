@@ -26,18 +26,27 @@ class FeedAdapter(
 
         fun bind(post: Post) {
 
-            binding.imageViewPostPhoto.setImageResource(post.uri)
+            binding.apply {
 
-            binding.postSettings.setOnClickListener {
-                val modalBottomSheetDialog = ModalBottomSheetDialog()
-                modalBottomSheetDialog.addItems(BottomSheetItem(R.string.stop_following, null)) {
-                    when(it.id) {
-                        R.string.stop_following -> stopFollowing(post.userAuth)
+                imageViewPostPhoto.setImageURI(post.uri)
+
+                textViewUsername.text = post.userAuth.name
+                textViewCaption.text = post.caption
+
+
+                postSettings.setOnClickListener {
+
+                    val modalBottomSheetDialog = ModalBottomSheetDialog()
+
+                    modalBottomSheetDialog.addItems(BottomSheetItem(R.string.stop_following, null)) {
+                        when(it.id) {
+                            R.string.stop_following -> stopFollowing(post.userAuth)
+                        }
+                        modalBottomSheetDialog.dismiss()
                     }
-                    modalBottomSheetDialog.dismiss()
-                }
 
-                modalBottomSheetDialog.show(supportFragmentManager, null)
+                    modalBottomSheetDialog.show(supportFragmentManager, null)
+                }
             }
 
         }

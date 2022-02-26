@@ -1,8 +1,9 @@
 package co.pvitor.instagram.home.data
 
+import co.pvitor.instagram.common.model.LocalCache
 import co.pvitor.instagram.common.model.Post
 
-object FeedMemoryCache: HomeCache<List<Post>> {
+object FeedMemoryCache: LocalCache<List<Post>> {
 
     private var postList: List<Post>? = null
 
@@ -10,11 +11,11 @@ object FeedMemoryCache: HomeCache<List<Post>> {
         return postList != null
     }
 
-    override fun set(data: List<Post>) {
+    override fun set(data: List<Post>?) {
         postList = data
     }
 
-    override fun get(key: String): List<Post>? {
+    override fun get(key: String?): List<Post>? {
         return postList
     }
 

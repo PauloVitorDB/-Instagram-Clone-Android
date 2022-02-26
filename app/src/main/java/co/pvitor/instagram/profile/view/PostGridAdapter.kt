@@ -12,7 +12,7 @@ class PostGridAdapter: RecyclerView.Adapter<PostGridAdapter.PhotoItemViewHolder>
 
     class PhotoItemViewHolder(private val binding: ItemGridPhotoBinding): RecyclerView.ViewHolder(binding.root) {
         fun bind(post: Post) {
-            binding.imageViewGridPhoto.setImageResource(post.uri)
+            binding.imageViewGridPhoto.setImageURI(post.uri)
         }
     }
 

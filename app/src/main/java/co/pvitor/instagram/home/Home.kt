@@ -9,6 +9,7 @@ interface Home {
 
     interface Presenter: BasePresenter {
         fun displayPosts()
+        fun clear()
     }
 
     interface View: BaseView<Home.Presenter> {

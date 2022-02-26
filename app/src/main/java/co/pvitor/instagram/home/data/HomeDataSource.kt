@@ -9,5 +9,5 @@ interface HomeDataSource {
     fun fetchPosts(uuid: String, callback: RequestCallback<List<Post>>)
 
     fun fetchSession(): UserAuth { throw UnsupportedOperationException() }
-    fun putFeedList(data: List<Post>) { throw UnsupportedOperationException() }
+    fun putFeedList(data: List<Post>?) { throw UnsupportedOperationException() }
 }

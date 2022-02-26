@@ -1,8 +1,9 @@
 package co.pvitor.instagram.profile.data
 
+import co.pvitor.instagram.common.model.LocalCache
 import co.pvitor.instagram.common.model.UserAuth
 
-object ProfileMemoryCache : ProfileCache<UserAuth> {
+object ProfileMemoryCache : LocalCache<UserAuth> {
 
     private var userAuth: UserAuth? = null
 
@@ -10,14 +11,14 @@ object ProfileMemoryCache : ProfileCache<UserAuth> {
         return userAuth != null
     }
 
-    override fun get(key: String) : UserAuth? {
+    override fun get(key: String?) : UserAuth? {
         if(userAuth?.uuid == key) {
             return userAuth
         }
         return null
     }
 
-    override fun put(data: UserAuth) {
+    override fun set(data: UserAuth?) {
         userAuth = data
     }
 

@@ -6,10 +6,9 @@ import java.util.*
 
 object Database {
 
-    val usersAuth = hashSetOf<UserAuth>()
+    val usersAuth = mutableListOf<UserAuth>()
 
     var sessionUserAuth: UserAuth? = null
-    var userPhoto: UserPhoto? = null
     var posts = hashMapOf<String, MutableSet<Post>>()
     var feedList = hashMapOf<String, MutableSet<Post>?>()
     val followers = hashMapOf<String, Set<String>>()
@@ -18,8 +17,8 @@ object Database {
 
     init {
 
-        val userA = UserAuth(uuidLoggedTest, "userA", "userA@test.com", "12345678", 0, 0, 0)
-        val userB = UserAuth(UUID.randomUUID().toString(), "userB", "userB@test.com", "12345678", 0, 0,0)
+        val userA = UserAuth(uuidLoggedTest, "userA", "userA@test.com", "12345678", null, 0, 0, 0)
+        val userB = UserAuth(UUID.randomUUID().toString(), "userB", "userB@test.com", "12345678", null, 0, 0,0)
 
         usersAuth.add(userA)
         usersAuth.add(userB)

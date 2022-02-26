@@ -1,6 +1,8 @@
 package co.pvitor.instagram.add.view
 
 import android.Manifest
+import android.app.Activity.RESULT_OK
+import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.net.Uri
@@ -14,6 +16,7 @@ import androidx.fragment.app.setFragmentResult
 import androidx.fragment.app.setFragmentResultListener
 import androidx.viewpager2.widget.ViewPager2
 import co.pvitor.instagram.R
+import co.pvitor.instagram.add.Add
 import co.pvitor.instagram.databinding.FragmentAddBinding
 import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.tabs.TabLayoutMediator
@@ -35,6 +38,15 @@ class AddFragment: Fragment(R.layout.fragment_add)  {
     private var _binding: FragmentAddBinding? = null
     private val binding get() = _binding!!
 
+    private lateinit var addResultListener: Add.ResultListener
+
+    override fun onAttach(context: Context) {
+        if(context is Add.ResultListener) {
+            addResultListener = context
+        }
+        super.onAttach(context)
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 
         super.onViewCreated(view, savedInstanceState)
@@ -44,8 +56,11 @@ class AddFragment: Fragment(R.layout.fragment_add)  {
             val uri: Uri? = bundle.getParcelable<Uri>(URI_KEY)
 
             uri?.let {
+
                 val intent = Intent(requireContext(), AddActivity::class.java)
                 intent.putExtra(URI_KEY, uri)
+
+                startActivityResult.launch(intent)
             }
 
         }
@@ -85,6 +100,12 @@ class AddFragment: Fragment(R.layout.fragment_add)  {
             tab.text = getString(tabLayoutTextRes)
         }.attach()
 
+    }
+
+    private val startActivityResult = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { activityResult ->
+        if(RESULT_OK == activityResult.resultCode) {
+            addResultListener.onPostCreated()
+        }
     }
 
     private fun openCameraView() {

@@ -7,7 +7,6 @@ import co.pvitor.instagram.R
 import co.pvitor.instagram.common.base.BaseFragment
 import co.pvitor.instagram.common.base.DependencyInjector
 import co.pvitor.instagram.common.model.Post
-import co.pvitor.instagram.common.view.BottomSheetItem
 import co.pvitor.instagram.common.view.ModalBottomSheetDialog
 import co.pvitor.instagram.databinding.FragmentHomeBinding
 import co.pvitor.instagram.home.Home
@@ -20,8 +19,6 @@ class HomeFragment : BaseFragment<Home.Presenter, FragmentHomeBinding>(
 ), Home.View {
 
     private lateinit var rvPostAdapter: FeedAdapter
-    private lateinit var modalBottomSheetDialog: ModalBottomSheetDialog
-
     override lateinit var presenter: Home.Presenter
 
     override fun getMenu(): Int {

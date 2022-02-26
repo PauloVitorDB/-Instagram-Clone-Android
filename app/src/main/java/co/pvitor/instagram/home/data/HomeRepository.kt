@@ -31,4 +31,9 @@ class HomeRepository(
         })
     }
 
+    fun clearCache() {
+        val localDataSource = dataSourceFactory.createLocalDataSource()
+        localDataSource.putFeedList(null)
+    }
+
 }

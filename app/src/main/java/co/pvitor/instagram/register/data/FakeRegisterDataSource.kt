@@ -4,7 +4,6 @@ import android.net.Uri
 import co.pvitor.instagram.R
 import co.pvitor.instagram.common.model.Database
 import co.pvitor.instagram.common.model.UserAuth
-import co.pvitor.instagram.common.model.UserPhoto
 import java.util.*
 
 class FakeRegisterDataSource: RegisterDataSource {
@@ -43,6 +42,7 @@ class FakeRegisterDataSource: RegisterDataSource {
                 name,
                 email,
                 password,
+                null,
                 0, 0, 0
             )
 
@@ -73,10 +73,11 @@ class FakeRegisterDataSource: RegisterDataSource {
             callback.onFailure(R.string.session_user_not_found)
         } else {
 
-            Database.userPhoto = UserPhoto(
-                userAuth.uuid,
-                uri
+            val index = Database.usersAuth.indexOf(Database.sessionUserAuth)
+            Database.usersAuth[index] = Database.sessionUserAuth!!.copy(
+                profilePhoto = uri
             )
+            Database.sessionUserAuth = Database.usersAuth[index]
 
             callback.onSuccess(uri)
         }
