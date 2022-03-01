@@ -6,6 +6,7 @@ import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.Toolbar
 import co.pvitor.instagram.R
 import co.pvitor.instagram.add.Add
 import co.pvitor.instagram.add.presentation.AddPresenter
@@ -35,7 +36,8 @@ class AddActivity: AppCompatActivity(), Add.View {
 
             binding.apply {
 
-                setSupportActionBar(toolbarAdd)
+                val toolbar: Toolbar = toolbarAdd
+                setSupportActionBar(toolbar)
                 supportActionBar?.setHomeAsUpIndicator(R.drawable.ic_arrow_back)
                 supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
@@ -51,6 +53,7 @@ class AddActivity: AppCompatActivity(), Add.View {
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menu?.clear()
         menuInflater.inflate(R.menu.menu_add_share, menu)
         return super.onCreateOptionsMenu(menu)
     }

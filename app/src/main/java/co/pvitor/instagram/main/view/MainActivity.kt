@@ -13,16 +13,23 @@ import co.pvitor.instagram.common.extensions.replaceFragment
 import co.pvitor.instagram.databinding.ActivityMainBinding
 import co.pvitor.instagram.home.view.HomeFragment
 import co.pvitor.instagram.profile.view.ProfileFragment
+import co.pvitor.instagram.search.Search
+import co.pvitor.instagram.search.view.SearchFragment
 import com.google.android.material.appbar.AppBarLayout
 import com.google.android.material.navigation.NavigationBarView
 
-class MainActivity: AppCompatActivity(), NavigationBarView.OnItemSelectedListener, Add.ResultListener {
+class MainActivity: AppCompatActivity(),
+    NavigationBarView.OnItemSelectedListener,
+    Add.ResultListener,
+    Search.SearchListener
+{
 
     private lateinit var binding: ActivityMainBinding
 
     private var currentFragment: Fragment? = null
 
     private lateinit var homeFragment:  HomeFragment
+    private lateinit var searchFragment: SearchFragment
     private lateinit var profileFragment: ProfileFragment
     private lateinit var addFragment: AddFragment
 
@@ -37,14 +44,15 @@ class MainActivity: AppCompatActivity(), NavigationBarView.OnItemSelectedListene
             title = ""
         }
 
+        homeFragment = HomeFragment()
+        searchFragment = SearchFragment()
+        profileFragment = ProfileFragment()
+        addFragment = AddFragment()
+
         binding.bottomNavigationView.apply {
             setOnItemSelectedListener(this@MainActivity)
             selectedItemId = R.id.menu_bottom_home
         }
-
-        homeFragment = HomeFragment()
-        profileFragment = ProfileFragment()
-        addFragment = AddFragment()
 
         setContentView(binding.root)
     }
@@ -77,6 +85,10 @@ class MainActivity: AppCompatActivity(), NavigationBarView.OnItemSelectedListene
                 setScrollToolbar(true)
                 homeFragment
             }
+            R.id.menu_bottom_search -> {
+                setScrollToolbar(false)
+                searchFragment
+            }
             R.id.menu_bottom_add -> {
                 setScrollToolbar(false)
                 addFragment
@@ -102,6 +114,7 @@ class MainActivity: AppCompatActivity(), NavigationBarView.OnItemSelectedListene
     }
 
     override fun onPostCreated() {
+
         homeFragment.presenter.clear()
 
         val fragmentHomeHasInitialized: Boolean = supportFragmentManager.findFragmentByTag(profileFragment.javaClass.simpleName) != null
@@ -112,4 +125,19 @@ class MainActivity: AppCompatActivity(), NavigationBarView.OnItemSelectedListene
         binding.bottomNavigationView.selectedItemId = R.id.menu_bottom_home
     }
 
+
+    override fun toProfile(uuid: String) {
+        val fragment = ProfileFragment()
+        fragment.apply {
+            arguments = Bundle().apply {
+                putString(ProfileFragment.KEY_USER_ID, uuid )
+            }
+        }
+
+        supportFragmentManager.beginTransaction().apply {
+            replace(R.id.main_fragment, fragment, fragment.javaClass.simpleName + "detail")
+            addToBackStack(null)
+            commit()
+        }
+    }
 }

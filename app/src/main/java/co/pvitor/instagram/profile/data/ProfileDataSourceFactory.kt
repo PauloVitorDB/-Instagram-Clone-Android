@@ -5,7 +5,7 @@ import co.pvitor.instagram.common.model.Post
 import co.pvitor.instagram.common.model.UserAuth
 
 class ProfileDataSourceFactory(
-    private val profileCache: LocalCache<UserAuth>,
+    private val profileCache: LocalCache<Pair<UserAuth, Boolean?>>,
     private val postsCache: LocalCache<List<Post>>
 ) {
 
@@ -13,18 +13,18 @@ class ProfileDataSourceFactory(
         return ProfileLocalDataSource(profileCache, postsCache)
     }
 
-    fun createFromUser(): ProfileDataSource {
+    fun createFromUser(uuid: String?): ProfileDataSource {
 
-        if(profileCache.isCached()) {
+         if(uuid == null && profileCache.isCached()) {
             return createLocalDataSource()
         }
 
         return ProfileFakeDataSource()
     }
 
-    fun createFromPosts(): ProfileDataSource {
+    fun createFromPosts(uuid: String?): ProfileDataSource {
 
-        if(postsCache.isCached()) {
+        if(uuid == null && postsCache.isCached()) {
             return createLocalDataSource()
         }
 

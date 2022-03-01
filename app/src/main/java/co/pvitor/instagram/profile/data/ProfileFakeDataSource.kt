@@ -9,7 +9,7 @@ import co.pvitor.instagram.common.util.RequestCallback
 
 class ProfileFakeDataSource: ProfileDataSource {
 
-    override fun fetchProfileUser(uuid: String, callback: RequestCallback<UserAuth>) {
+    override fun fetchProfileUser(uuid: String, callback: RequestCallback<Pair<UserAuth, Boolean?>>) {
 
         Handler(Looper.getMainLooper()).postDelayed({
             val userAuth: UserAuth? = Database.usersAuth.firstOrNull {
@@ -17,7 +17,15 @@ class ProfileFakeDataSource: ProfileDataSource {
             }
 
             if(userAuth != null) {
-                callback.onSuccess(userAuth)
+                if(uuid == Database.sessionUserAuth?.uuid) {
+                    callback.onSuccess(Pair(userAuth, null) )
+                } else {
+
+                    val followers = Database.followers[Database.sessionUserAuth?.uuid]
+
+                    val isFollower = followers?.firstOrNull { it == uuid }
+                    callback.onSuccess(Pair(userAuth, isFollower != null))
+                }
             } else {
                 callback.onFailure()
             }

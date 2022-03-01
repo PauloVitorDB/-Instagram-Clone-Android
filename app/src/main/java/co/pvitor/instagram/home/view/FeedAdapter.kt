@@ -30,9 +30,9 @@ class FeedAdapter(
 
                 imageViewPostPhoto.setImageURI(post.uri)
 
-                textViewUsername.text = post.userAuth.name
+                textViewUsername.text = post.publisher.name
                 textViewCaption.text = post.caption
-
+                civProfilePhoto.setImageURI(post.publisher.profilePhoto)
 
                 postSettings.setOnClickListener {
 
@@ -40,7 +40,7 @@ class FeedAdapter(
 
                     modalBottomSheetDialog.addItems(BottomSheetItem(R.string.stop_following, null)) {
                         when(it.id) {
-                            R.string.stop_following -> stopFollowing(post.userAuth)
+                            R.string.stop_following -> stopFollowing(post.publisher)
                         }
                         modalBottomSheetDialog.dismiss()
                     }

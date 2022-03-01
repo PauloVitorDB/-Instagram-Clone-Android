@@ -55,6 +55,8 @@ class AddFragment: Fragment(R.layout.fragment_add)  {
 
         super.onViewCreated(view, savedInstanceState)
 
+        _binding = FragmentAddBinding.bind(view)
+
         setFragmentResultListener(URI_SAVED_KEY) { key, bundle ->
 
             val uri: Uri? = bundle.getParcelable<Uri>(URI_KEY)

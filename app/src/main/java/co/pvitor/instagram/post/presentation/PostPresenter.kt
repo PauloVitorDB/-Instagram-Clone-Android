@@ -1,5 +1,6 @@
 package co.pvitor.instagram.post.presentation
 
+import android.net.Uri
 import co.pvitor.instagram.R
 import co.pvitor.instagram.post.Post
 import co.pvitor.instagram.post.data.PostRepository
@@ -12,6 +13,8 @@ class PostPresenter(
 ): Post.Presenter, CoroutineScope {
 
     private val view get() = _view!!
+
+    override lateinit var selectedUri: Uri
 
     private val job = Job()
     override val coroutineContext: CoroutineContext = job + Dispatchers.IO

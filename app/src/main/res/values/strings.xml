@@ -68,4 +68,9 @@
     <string name="share">Compartilhar</string>
     <string name="error_fetch_gallery_pictures">Erro ao buscar as fotos da galeria</string>
     <string name="empty_device_gallery">Não há fotos na galeria...</string>
+    <string name="search">Pesquisar</string>
+    <string name="empty_search_list">Nenhum resultado encontrado...</string>
+    <string name="error_search">Erro ao efetuar busca, tente novamente...</string>
+    <string name="unfollow">Parar de seguir</string>
+    <string name="follow">Seguir</string>
 </resources>

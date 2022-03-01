@@ -8,20 +8,22 @@ class ProfileRepository(
     private val profileDataSourceFactory: ProfileDataSourceFactory
 ) {
 
+    private fun getUserUUID(uuid: String?): String {
+        return uuid ?: profileDataSourceFactory.createLocalDataSource().fetchSession().uuid
+    }
+
     fun clearCache() {
         val localDataSource = profileDataSourceFactory.createLocalDataSource()
         localDataSource.putPostList(null)
     }
 
-    fun fetchProfileUser(callback: RequestCallback<UserAuth>) {
+    fun fetchProfileUser(uuid: String?, callback: RequestCallback<Pair<UserAuth, Boolean?>>) {
 
         val localDataSource: ProfileDataSource = profileDataSourceFactory.createLocalDataSource()
 
-        val userAuthSession = localDataSource.fetchSession()
+        val dataSource = profileDataSourceFactory.createFromUser(uuid)
 
-        val dataSource = profileDataSourceFactory.createFromUser()
-
-        dataSource.fetchProfileUser(userAuthSession.uuid, object : RequestCallback<UserAuth> {
+        dataSource.fetchProfileUser(getUserUUID(uuid), object : RequestCallback<Pair<UserAuth, Boolean?>> {
             override fun onComplete() {
                 callback.onComplete()
             }
@@ -30,25 +32,27 @@ class ProfileRepository(
                 callback.onFailure()
             }
 
-            override fun onSuccess(response: UserAuth) {
-                localDataSource.putUser(response)
+            override fun onSuccess(response: Pair<UserAuth, Boolean?>) {
+                if(uuid == null) {
+                    localDataSource.putUser(response)
+                }
                 callback.onSuccess(response)
             }
         })
     }
 
-    fun fetchProfilePosts(callback: RequestCallback<List<Post>>) {
+    fun fetchProfilePosts(uuid: String?, callback: RequestCallback<List<Post>>) {
 
         val localDataSource: ProfileDataSource = profileDataSourceFactory.createLocalDataSource()
 
-        val sessionUserAuth = localDataSource.fetchSession()
+        val dataSource: ProfileDataSource = profileDataSourceFactory.createFromPosts(uuid)
 
-        val dataSource: ProfileDataSource = profileDataSourceFactory.createFromPosts()
-
-        dataSource.fetchProfilePosts(sessionUserAuth.uuid, object : RequestCallback<List<Post>> {
+        dataSource.fetchProfilePosts(getUserUUID(uuid), object : RequestCallback<List<Post>> {
 
             override fun onSuccess(response: List<Post>) {
-                localDataSource.putPostList(response)
+                if(uuid == null) {
+                    localDataSource.putPostList(response)
+                }
                 callback.onSuccess(response)
             }
 

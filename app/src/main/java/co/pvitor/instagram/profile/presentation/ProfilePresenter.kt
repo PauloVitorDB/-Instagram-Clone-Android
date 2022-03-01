@@ -15,9 +15,9 @@ class ProfilePresenter(
 
     private val view get() = _view!!
 
-    override fun fetchProfilePosts() {
+    override fun fetchProfilePosts(uuid: String?) {
 
-        repository.fetchProfilePosts(object: RequestCallback<List<Post>> {
+        repository.fetchProfilePosts(uuid, object: RequestCallback<List<Post>> {
 
             override fun onSuccess(response: List<Post>) {
 
@@ -41,13 +41,13 @@ class ProfilePresenter(
         })
     }
 
-    override fun fetchProfileUser() {
+    override fun fetchProfileUser(uuid: String?) {
 
         view.showProgress(true)
 
-        repository.fetchProfileUser(object: RequestCallback<UserAuth> {
+        repository.fetchProfileUser(uuid, object: RequestCallback<Pair<UserAuth, Boolean?>> {
 
-            override fun onSuccess(response: UserAuth) {
+            override fun onSuccess(response: Pair<UserAuth, Boolean?>) {
                 view.displayUserProfile(response)
             }
 

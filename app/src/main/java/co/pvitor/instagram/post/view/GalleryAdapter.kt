@@ -13,6 +13,7 @@ class GalleryAdapter(
 ): RecyclerView.Adapter<GalleryAdapter.GalleryViewHolder>() {
 
     var deviceGalleryPictureList: List<Uri> = mutableListOf()
+    private lateinit var selectedUri: Uri
 
     inner class GalleryViewHolder(private val binding: ItemGridPhotoBinding): RecyclerView.ViewHolder(binding.root) {
         fun bind(imageUri: Uri) {
@@ -20,9 +21,11 @@ class GalleryAdapter(
             val bitmap: Bitmap = binding.root.context.contentResolver.loadThumbnail(imageUri, Size(200, 200), null)
             binding.imageViewGridPhoto.setImageBitmap(bitmap)
 
-            selectedItemListener?.let { listner ->
+            selectedUri = imageUri
+
+            selectedItemListener?.let { listener ->
                 binding.imageViewGridPhoto.setOnClickListener {
-                    listner.invoke(imageUri)
+                    listener.invoke(imageUri)
                 }
             }
         }

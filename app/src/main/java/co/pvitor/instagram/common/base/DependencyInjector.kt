@@ -16,6 +16,9 @@ import co.pvitor.instagram.profile.data.*
 import co.pvitor.instagram.register.data.FakeRegisterDataSource
 import co.pvitor.instagram.register.data.RegisterDataSource
 import co.pvitor.instagram.register.data.RegisterRepository
+import co.pvitor.instagram.search.data.SearchDataSource
+import co.pvitor.instagram.search.data.SearchRemoteDataSource
+import co.pvitor.instagram.search.data.SearchRepository
 import co.pvitor.instagram.splash.data.LocalSplashDataSource
 import co.pvitor.instagram.splash.data.SplashDataSource
 import co.pvitor.instagram.splash.data.SplashRepository
@@ -55,6 +58,11 @@ object DependencyInjector {
     fun postRepository(context: Context): PostRepository {
         val dataSource: PostDataSource = PostLocalDataSource(context)
         return PostRepository(dataSource)
+    }
+
+    fun searchRepository(): SearchRepository {
+        val dataSource: SearchDataSource = SearchRemoteDataSource()
+        return SearchRepository(dataSource)
     }
 
 }

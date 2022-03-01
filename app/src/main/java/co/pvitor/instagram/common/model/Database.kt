@@ -11,7 +11,7 @@ object Database {
     var sessionUserAuth: UserAuth? = null
     var posts = hashMapOf<String, MutableSet<Post>>()
     var feedList = hashMapOf<String, MutableSet<Post>?>()
-    val followers = hashMapOf<String, Set<String>>()
+    val followers = hashMapOf<String, MutableSet<String>>()
 
     private var uuidLoggedTest: String = UUID.randomUUID().toString()
 
@@ -31,7 +31,15 @@ object Database {
         posts[userB.uuid] = mutableSetOf()
         feedList[userB.uuid] = mutableSetOf()
 
+        for(i in 0..30) {
+
+            val user = UserAuth(UUID.randomUUID().toString(), "user$i", "user$i@test.com", "12345678", null, 0, 0,0)
+            usersAuth.add(user)
+        }
+
         sessionUserAuth = usersAuth.first()
+
+        followers[sessionUserAuth?.uuid]?.add(usersAuth[2].uuid)
 
     }
 

@@ -1,22 +1,24 @@
-package co.pvitor.instagram.post
+package co.pvitor.instagram.search
 
-import android.net.Uri
 import androidx.annotation.StringRes
 import co.pvitor.instagram.common.base.BasePresenter
 import co.pvitor.instagram.common.base.BaseView
+import co.pvitor.instagram.common.model.UserAuth
 
-interface Post {
+interface Search {
 
     interface Presenter: BasePresenter {
-        var selectedUri: Uri
-        fun fetchPictures()
+        fun fetchUsers(search: String)
     }
 
     interface View: BaseView<Presenter> {
         fun showProgress(enabled: Boolean)
         fun displayRequestFailure(@StringRes message: Int?)
-        fun displayEmptyPictures()
-        fun displayPictures(pictureList: List<Uri>)
+        fun displayUsersList(users: List<UserAuth>)
+        fun displayEmptyUsersList()
     }
 
+    interface SearchListener {
+        fun toProfile(uuid: String)
+    }
 }

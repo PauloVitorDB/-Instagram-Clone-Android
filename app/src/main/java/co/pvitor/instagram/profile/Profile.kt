@@ -12,14 +12,14 @@ interface Profile {
         fun showProgress(enabled: Boolean)
         fun displayUserPosts(posts: List<Post>)
         fun displayEmptyPosts()
-        fun displayUserProfile(user: UserAuth)
+        fun displayUserProfile(user: Pair<UserAuth, Boolean?>)
         fun displayRequestFailure(@StringRes message: Int?)
     }
 
     interface Presenter: BasePresenter {
         fun clear()
-        fun fetchProfileUser()
-        fun fetchProfilePosts()
+        fun fetchProfileUser(uuid: String?)
+        fun fetchProfilePosts(uuid: String?)
     }
 
 }

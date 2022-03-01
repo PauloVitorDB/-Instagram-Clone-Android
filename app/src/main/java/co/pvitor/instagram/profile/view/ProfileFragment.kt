@@ -21,6 +21,12 @@ class ProfileFragment: BaseFragment<Profile.Presenter, FragmentProfileBinding>(
     FragmentProfileBinding::bind
 ), Profile.View {
 
+    companion object {
+        const val KEY_USER_ID = "uuid"
+    }
+
+    private var uuid: String? = null
+
     override lateinit var presenter: Profile.Presenter
 
     private lateinit var modalBottomSheetDialog: ModalBottomSheetDialog
@@ -32,6 +38,8 @@ class ProfileFragment: BaseFragment<Profile.Presenter, FragmentProfileBinding>(
     }
 
     override fun setupOnViewCreated() {
+
+        uuid = arguments?.getString(KEY_USER_ID)
 
         binding.recyclerViewPhotoGrid.apply {
             layoutManager = GridLayoutManager(requireContext(), 3)
@@ -70,7 +78,7 @@ class ProfileFragment: BaseFragment<Profile.Presenter, FragmentProfileBinding>(
 
         })
 
-        presenter.fetchProfileUser()
+        presenter.fetchProfileUser(uuid)
     }
 
     override fun getMenu(): Int {
@@ -93,14 +101,25 @@ class ProfileFragment: BaseFragment<Profile.Presenter, FragmentProfileBinding>(
         }
     }
 
-    override fun displayUserProfile(user: UserAuth) {
-        user.apply {
+    override fun displayUserProfile(user:  Pair<UserAuth, Boolean?>) {
+
+        val (userAuth, following) = user
+
+        userAuth.apply {
             binding.textViewProfileUsername.text = name.toString()
             binding.textViewPostsCounter.text = countPosts.toString()
             binding.textViewFollowersCounter.text = countFollowers.toString()
             binding.textViewFollowingCounter.text = countFollowing.toString()
+
+            binding.buttonEditProfile.text = when(following) {
+                null -> getString(R.string.edit_profile)
+                true -> getString(R.string.unfollow)
+                false -> getString(R.string.follow)
+            }
+
         }
-        presenter.fetchProfilePosts()
+
+        presenter.fetchProfilePosts(uuid)
     }
 
     override fun displayUserPosts(posts: List<Post>) {

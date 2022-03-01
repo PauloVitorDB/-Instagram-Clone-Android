@@ -7,7 +7,7 @@ import co.pvitor.instagram.common.model.UserAuth
 import co.pvitor.instagram.common.util.RequestCallback
 
 class ProfileLocalDataSource(
-    private val profileCache: LocalCache<UserAuth>,
+    private val profileCache: LocalCache<Pair<UserAuth, Boolean?>>,
     private val postsCache: LocalCache<List<Post>>
 ): ProfileDataSource {
 
@@ -21,7 +21,7 @@ class ProfileLocalDataSource(
 
     }
 
-    override fun fetchProfileUser(uuid: String, callback: RequestCallback<UserAuth>) {
+    override fun fetchProfileUser(uuid: String, callback: RequestCallback<Pair<UserAuth, Boolean?>>) {
 
         val userAuth = profileCache.get(uuid)
 
@@ -35,7 +35,7 @@ class ProfileLocalDataSource(
         return Database.sessionUserAuth ?: throw RuntimeException("User not found in session")
     }
 
-    override fun putUser(response: UserAuth?) {
+    override fun putUser(response: Pair<UserAuth, Boolean?>?) {
         profileCache.set(response)
     }
 
