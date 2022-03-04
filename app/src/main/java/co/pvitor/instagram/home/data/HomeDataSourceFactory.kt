@@ -11,7 +11,7 @@ class HomeDataSourceFactory(
         return if(feedListCache.isCached()) {
             createLocalDataSource()
         } else {
-            HomeRemoteDataSource()
+            FireHomeDataSource()
         }
     }
 

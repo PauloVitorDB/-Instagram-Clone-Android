@@ -5,10 +5,11 @@ import android.os.Looper
 import co.pvitor.instagram.R
 import co.pvitor.instagram.common.model.Database
 import co.pvitor.instagram.common.model.UserAuth
+import co.pvitor.instagram.common.util.RequestCallback
 
-class FakeDataSource: LoginDataSource {
+class FakeLoginDataSource: LoginDataSource {
 
-    override fun login(email: String, password: String, callback: LoginCallback<UserAuth>) {
+    override fun login(email: String, password: String, callback: RequestCallback<String?>) {
 
         Handler(Looper.getMainLooper()).postDelayed({
 
@@ -21,7 +22,7 @@ class FakeDataSource: LoginDataSource {
                 userAuth.password != password -> callback.onFailure(R.string.wrong_password)
                 else -> {
                     Database.sessionUserAuth = userAuth
-                    callback.onSuccess(userAuth)
+                    callback.onSuccess(email)
                 }
             }
 

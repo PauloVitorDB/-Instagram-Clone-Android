@@ -15,10 +15,10 @@ class AddRemoteDataSource: AddDataSource {
 
             val post = Post(
                 userUUID,
-                uri,
+                null,//uri
                 caption,
                 System.currentTimeMillis(),
-                Database.sessionUserAuth!!
+                null,//Database.sessionUserAuth!!
             )
 
             Database.posts[userUUID]?.add(post)

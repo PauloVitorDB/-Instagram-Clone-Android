@@ -4,7 +4,6 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
-import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
 import co.pvitor.instagram.R
 import co.pvitor.instagram.common.model.Post
@@ -12,6 +11,7 @@ import co.pvitor.instagram.common.model.UserAuth
 import co.pvitor.instagram.common.view.BottomSheetItem
 import co.pvitor.instagram.common.view.ModalBottomSheetDialog
 import co.pvitor.instagram.databinding.ItemPostBinding
+import com.squareup.picasso.Picasso
 
 class FeedAdapter(
     context: Context
@@ -28,11 +28,11 @@ class FeedAdapter(
 
             binding.apply {
 
-                imageViewPostPhoto.setImageURI(post.uri)
+                Picasso.with(binding.root.context).load(post.uri).into(imageViewPostPhoto)
+                Picasso.with(binding.root.context).load(post.publisher?.profilePhotoUrl).into(civProfilePhoto)
 
-                textViewUsername.text = post.publisher.name
+                textViewUsername.text = post.publisher?.name
                 textViewCaption.text = post.caption
-                civProfilePhoto.setImageURI(post.publisher.profilePhoto)
 
                 postSettings.setOnClickListener {
 
@@ -40,7 +40,7 @@ class FeedAdapter(
 
                     modalBottomSheetDialog.addItems(BottomSheetItem(R.string.stop_following, null)) {
                         when(it.id) {
-                            R.string.stop_following -> stopFollowing(post.publisher)
+//                            R.string.stop_following -> stopFollowing(post?.publisher)
                         }
                         modalBottomSheetDialog.dismiss()
                     }

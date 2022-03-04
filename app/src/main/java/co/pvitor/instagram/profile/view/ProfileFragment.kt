@@ -78,6 +78,16 @@ class ProfileFragment: BaseFragment<Profile.Presenter, FragmentProfileBinding>(
 
         })
 
+        binding.buttonEditProfile.setOnClickListener {
+            if(it.tag == true) {
+                binding.buttonEditProfile.text = getText(R.string.follow)
+                presenter.followUser(uuid, false)
+            } else {
+                binding.buttonEditProfile.text = getText(R.string.unfollow)
+                presenter.followUser(uuid, true)
+            }
+        }
+
         presenter.fetchProfileUser(uuid)
     }
 
@@ -116,6 +126,8 @@ class ProfileFragment: BaseFragment<Profile.Presenter, FragmentProfileBinding>(
                 true -> getString(R.string.unfollow)
                 false -> getString(R.string.follow)
             }
+
+            binding.buttonEditProfile.tag = following
 
         }
 

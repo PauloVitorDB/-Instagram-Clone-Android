@@ -68,4 +68,25 @@ class ProfileRepository(
 
     }
 
+    fun followUser(uuid: String, follow: Boolean, callback: RequestCallback<Boolean>) {
+
+        val dataSource = profileDataSourceFactory.createRemoteDataSource()
+
+        dataSource.followUser(uuid, follow, object: RequestCallback<Boolean> {
+            override fun onSuccess(response: Boolean) {
+                callback.onSuccess(response)
+            }
+
+            override fun onFailure() {
+                callback.onFailure()
+            }
+
+            override fun onComplete() {
+                callback.onComplete()
+            }
+
+        })
+
+    }
+
 }

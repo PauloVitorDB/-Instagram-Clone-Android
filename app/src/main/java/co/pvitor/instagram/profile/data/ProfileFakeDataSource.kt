@@ -52,4 +52,28 @@ class ProfileFakeDataSource: ProfileDataSource {
         }, 3000)
     }
 
+    override fun followUser(uuid: String, isFollow: Boolean, callback: RequestCallback<Boolean>) {
+        Handler(Looper.getMainLooper()).postDelayed({
+
+            val sessionUUID = Database.sessionUserAuth!!.uuid
+
+            var followers = Database.followers[sessionUUID]
+
+            if(followers == null) {
+                followers = mutableSetOf()
+                Database.followers[sessionUUID] = followers
+            }
+
+            if(isFollow) {
+                Database.followers[sessionUUID]!!.add(uuid)
+            } else {
+                Database.followers[sessionUUID]!!.remove(uuid)
+            }
+
+            callback.onSuccess(true)
+            callback.onComplete()
+
+        }, 1500)
+    }
+
 }

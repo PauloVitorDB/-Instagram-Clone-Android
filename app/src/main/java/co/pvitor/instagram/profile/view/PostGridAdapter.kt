@@ -5,6 +5,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import co.pvitor.instagram.common.model.Post
 import co.pvitor.instagram.databinding.ItemGridPhotoBinding
+import com.squareup.picasso.Picasso
 
 class PostGridAdapter: RecyclerView.Adapter<PostGridAdapter.PhotoItemViewHolder>() {
 
@@ -12,7 +13,7 @@ class PostGridAdapter: RecyclerView.Adapter<PostGridAdapter.PhotoItemViewHolder>
 
     class PhotoItemViewHolder(private val binding: ItemGridPhotoBinding): RecyclerView.ViewHolder(binding.root) {
         fun bind(post: Post) {
-            binding.imageViewGridPhoto.setImageURI(post.uri)
+            Picasso.with(binding.root.context).load(post.uri).into(binding.imageViewGridPhoto)
         }
     }
 
