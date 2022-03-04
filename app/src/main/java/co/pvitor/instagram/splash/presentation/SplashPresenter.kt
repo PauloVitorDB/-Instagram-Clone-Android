@@ -1,7 +1,7 @@
 package co.pvitor.instagram.splash.presentation
 
+import co.pvitor.instagram.common.util.RequestCallback
 import co.pvitor.instagram.splash.Splash
-import co.pvitor.instagram.splash.data.SplashCallback
 import co.pvitor.instagram.splash.data.SplashRepository
 
 class SplashPresenter(
@@ -12,9 +12,9 @@ class SplashPresenter(
     private val view get() = _view!!
 
     override fun authenticated() {
-        repository.authenticated(object: SplashCallback {
+        repository.authenticated(object: RequestCallback<String?> {
 
-            override fun onSuccess() {
+            override fun onSuccess(response: String?) {
                 view.toMainScreen()
             }
 
