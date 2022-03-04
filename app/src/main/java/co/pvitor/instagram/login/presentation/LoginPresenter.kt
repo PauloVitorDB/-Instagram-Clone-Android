@@ -1,11 +1,9 @@
 package co.pvitor.instagram.login.presentation
 
 import android.util.Patterns
-import androidx.annotation.StringRes
 import co.pvitor.instagram.R
-import co.pvitor.instagram.common.model.UserAuth
+import co.pvitor.instagram.common.util.RequestCallback
 import co.pvitor.instagram.login.Login
-import co.pvitor.instagram.login.data.LoginCallback
 import co.pvitor.instagram.login.data.LoginRepository
 
 class LoginPresenter(
@@ -35,12 +33,12 @@ class LoginPresenter(
 
             view.showProgress(true)
 
-            repository?.login(email, password, object : LoginCallback<UserAuth> {
-                override fun onSuccess(response: UserAuth) {
+            repository?.login(email, password, object : RequestCallback<String?> {
+                override fun onSuccess(response: String?) {
                     view.onUserAuthenticate()
                 }
 
-                override fun onFailure(@StringRes message: Int?) {
+                override fun onFailure(message: Int?) {
                     view.onUserUnauthorized(message)
                 }
 
