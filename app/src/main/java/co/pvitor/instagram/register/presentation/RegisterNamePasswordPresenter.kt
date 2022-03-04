@@ -35,9 +35,9 @@ class RegisterNamePasswordPresenter(
 
             view.showProgress(true)
 
-            repository.register(email, password, name, object: RegisterCallback<UserAuth> {
+            repository.register(email, password, name, object: RegisterCallback<String?> {
 
-                override fun onSuccess(response: UserAuth) {
+                override fun onSuccess(response: String?) {
                     val fragment: Fragment = RegisterConfirmFragment()
                     fragment.apply {
                         arguments = Bundle().apply {

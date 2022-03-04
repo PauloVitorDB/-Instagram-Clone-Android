@@ -73,4 +73,9 @@
     <string name="error_search">Erro ao efetuar busca, tente novamente...</string>
     <string name="unfollow">Parar de seguir</string>
     <string name="follow">Seguir</string>
+    <string name="internal_server_error">Erro interno do servidor...</string>
+    <string name="error_session_user">Falha ao acessar a sessão do usuário</string>
+    <string name="error_update_photo">Não foi possível atulizar a foto de perfil</string>
+    <string name="invalid_login">Não foi possível fazer o login</string>
+    <string name="error_loading_posts">Nao foi possivel buscar os posts</string>
 </resources>

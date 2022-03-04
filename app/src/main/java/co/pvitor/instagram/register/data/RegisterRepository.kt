@@ -11,7 +11,7 @@ class RegisterRepository (
         dataSource.register(email, callback)
     }
 
-    fun register(email: String, password: String, name: String, callback: RegisterCallback<UserAuth>) {
+    fun register(email: String, password: String, name: String, callback: RegisterCallback<String?>) {
         dataSource.register(email, password, name, callback)
     }
 

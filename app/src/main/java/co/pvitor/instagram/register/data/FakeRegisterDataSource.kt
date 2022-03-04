@@ -26,7 +26,7 @@ class FakeRegisterDataSource: RegisterDataSource {
         email: String,
         password: String,
         name: String,
-        callback: RegisterCallback<UserAuth>
+        callback: RegisterCallback<String?>
     ) {
 
         val userExists: UserAuth? = Database.usersAuth.firstOrNull {
@@ -51,13 +51,13 @@ class FakeRegisterDataSource: RegisterDataSource {
 
             Database.posts[userAuth.uuid] = mutableSetOf()
             Database.feedList[userAuth.uuid] = mutableSetOf()
-            Database.followers[userAuth.uuid] = setOf()
+            Database.followers[userAuth.uuid] = mutableSetOf()
 
             if(!isUserRegistered) {
                 callback.onFailure(R.string.register_fail)
             } else {
 
-                callback.onSuccess(userAuth)
+                callback.onSuccess(email)
             }
 
         }
