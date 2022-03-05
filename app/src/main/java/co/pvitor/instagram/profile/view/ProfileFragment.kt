@@ -7,7 +7,7 @@ import co.pvitor.instagram.R
 import co.pvitor.instagram.common.base.BaseFragment
 import co.pvitor.instagram.common.base.DependencyInjector
 import co.pvitor.instagram.common.model.Post
-import co.pvitor.instagram.common.model.UserAuth
+import co.pvitor.instagram.common.model.User
 import co.pvitor.instagram.common.view.BottomSheetItem
 import co.pvitor.instagram.common.view.ModalBottomSheetDialog
 import co.pvitor.instagram.databinding.FragmentProfileBinding
@@ -111,15 +111,15 @@ class ProfileFragment: BaseFragment<Profile.Presenter, FragmentProfileBinding>(
         }
     }
 
-    override fun displayUserProfile(user:  Pair<UserAuth, Boolean?>) {
+    override fun displayUserProfile(user:  Pair<User, Boolean?>) {
 
         val (userAuth, following) = user
 
         userAuth.apply {
             binding.textViewProfileUsername.text = name.toString()
             binding.textViewPostsCounter.text = countPosts.toString()
-            binding.textViewFollowersCounter.text = countFollowers.toString()
-            binding.textViewFollowingCounter.text = countFollowing.toString()
+            binding.textViewFollowersCounter.text = followers.toString()
+            binding.textViewFollowingCounter.text = following.toString()
 
             binding.buttonEditProfile.text = when(following) {
                 null -> getString(R.string.edit_profile)

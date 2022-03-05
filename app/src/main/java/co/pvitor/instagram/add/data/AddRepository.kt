@@ -15,20 +15,22 @@ class AddRepository(
 
         val dataSource = dataSourceFactory.createRemoteDataSource()
 
-        dataSource.createPost(userAuth.uuid, uri, caption, object: RequestCallback<Boolean> {
-            override fun onSuccess(response: Boolean) {
-                callback.onSuccess(response)
-            }
+        userAuth.uuid?.let {
+            dataSource.createPost(it, uri, caption, object: RequestCallback<Boolean> {
+                override fun onSuccess(response: Boolean) {
+                    callback.onSuccess(response)
+                }
 
-            override fun onFailure() {
-                callback.onFailure()
-            }
+                override fun onFailure() {
+                    callback.onFailure()
+                }
 
-            override fun onComplete() {
-                callback.onComplete()
-            }
+                override fun onComplete() {
+                    callback.onComplete()
+                }
 
-        })
+            })
+        }
 
     }
 

@@ -1,7 +1,7 @@
 package co.pvitor.instagram.profile.data
 
 import co.pvitor.instagram.common.model.Post
-import co.pvitor.instagram.common.model.UserAuth
+import co.pvitor.instagram.common.model.User
 import co.pvitor.instagram.common.util.RequestCallback
 
 class ProfileRepository(
@@ -9,7 +9,7 @@ class ProfileRepository(
 ) {
 
     private fun getUserUUID(uuid: String?): String {
-        return uuid ?: profileDataSourceFactory.createLocalDataSource().fetchSession().uuid
+        return uuid ?: profileDataSourceFactory.createLocalDataSource().fetchSession().uuid!!
     }
 
     fun clearCache() {
@@ -17,13 +17,13 @@ class ProfileRepository(
         localDataSource.putPostList(null)
     }
 
-    fun fetchProfileUser(uuid: String?, callback: RequestCallback<Pair<UserAuth, Boolean?>>) {
+    fun fetchProfileUser(uuid: String?, callback: RequestCallback<Pair<User, Boolean?>>) {
 
         val localDataSource: ProfileDataSource = profileDataSourceFactory.createLocalDataSource()
 
         val dataSource = profileDataSourceFactory.createFromUser(uuid)
 
-        dataSource.fetchProfileUser(getUserUUID(uuid), object : RequestCallback<Pair<UserAuth, Boolean?>> {
+        dataSource.fetchProfileUser(getUserUUID(uuid), object : RequestCallback<Pair<User, Boolean?>> {
             override fun onComplete() {
                 callback.onComplete()
             }
@@ -32,7 +32,7 @@ class ProfileRepository(
                 callback.onFailure()
             }
 
-            override fun onSuccess(response: Pair<UserAuth, Boolean?>) {
+            override fun onSuccess(response: Pair<User, Boolean?>) {
                 if(uuid == null) {
                     localDataSource.putUser(response)
                 }

@@ -15,20 +15,22 @@ class HomeRepository(
 
         val dataSource: HomeDataSource = dataSourceFactory.createDataSourceFromFeed()
 
-        dataSource.fetchPosts(userAuth.uuid, object: RequestCallback<List<Post>> {
-            override fun onSuccess(response: List<Post>) {
-                localDataSource.putFeedList(response)
-                callback.onSuccess(response)
-            }
+        userAuth.uuid?.let {
+            dataSource.fetchPosts(it, object: RequestCallback<List<Post>> {
+                override fun onSuccess(response: List<Post>) {
+                    localDataSource.putFeedList(response)
+                    callback.onSuccess(response)
+                }
 
-            override fun onFailure() {
-                callback.onFailure()
-            }
+                override fun onFailure() {
+                    callback.onFailure()
+                }
 
-            override fun onComplete() {
-                callback.onComplete()
-            }
-        })
+                override fun onComplete() {
+                    callback.onComplete()
+                }
+            })
+        }
     }
 
     fun clearCache() {

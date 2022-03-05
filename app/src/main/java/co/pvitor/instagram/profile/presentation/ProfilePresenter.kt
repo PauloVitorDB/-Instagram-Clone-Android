@@ -1,9 +1,8 @@
 package co.pvitor.instagram.profile.presentation
 
 import co.pvitor.instagram.R
-import co.pvitor.instagram.common.model.Database
 import co.pvitor.instagram.common.model.Post
-import co.pvitor.instagram.common.model.UserAuth
+import co.pvitor.instagram.common.model.User
 import co.pvitor.instagram.common.util.RequestCallback
 import co.pvitor.instagram.profile.Profile
 import co.pvitor.instagram.profile.data.ProfileRepository
@@ -45,9 +44,9 @@ class ProfilePresenter(
 
         view.showProgress(true)
 
-        repository.fetchProfileUser(uuid, object: RequestCallback<Pair<UserAuth, Boolean?>> {
+        repository.fetchProfileUser(uuid, object: RequestCallback<Pair<User, Boolean?>> {
 
-            override fun onSuccess(response: Pair<UserAuth, Boolean?>) {
+            override fun onSuccess(response: Pair<User, Boolean?>) {
                 view.displayUserProfile(response)
             }
 

@@ -3,6 +3,7 @@ package co.pvitor.instagram.register.data
 import android.net.Uri
 import co.pvitor.instagram.R
 import co.pvitor.instagram.common.model.Database
+import co.pvitor.instagram.common.model.User
 import co.pvitor.instagram.common.model.UserAuth
 import java.util.*
 
@@ -10,7 +11,7 @@ class FakeRegisterDataSource: RegisterDataSource {
 
     override fun register(email: String, callback: RegisterCallback<String>) {
 
-        val userAuth: UserAuth? = Database.usersAuth.firstOrNull {
+        val userAuth: User? = Database.usersAuth.firstOrNull {
             email == it.email
         }
 
@@ -29,7 +30,7 @@ class FakeRegisterDataSource: RegisterDataSource {
         callback: RegisterCallback<String?>
     ) {
 
-        val userExists: UserAuth? = Database.usersAuth.firstOrNull {
+        val userExists: User? = Database.usersAuth.firstOrNull {
             email == it.email
         }
 
@@ -37,11 +38,10 @@ class FakeRegisterDataSource: RegisterDataSource {
             callback.onFailure(R.string.register_error_user_exists)
         } else {
 
-            val userAuth = UserAuth(
+            val userAuth = User(
                 UUID.randomUUID().toString(),
                 name,
                 email,
-                password,
                 null,
                 0, 0, 0
             )
@@ -49,7 +49,7 @@ class FakeRegisterDataSource: RegisterDataSource {
             val isUserRegistered = Database.usersAuth.add(userAuth)
             Database.sessionUserAuth = userAuth
 
-            Database.posts[userAuth.uuid] = mutableSetOf()
+            Database.posts[userAuth.uuid!!] = mutableSetOf()
             Database.feedList[userAuth.uuid] = mutableSetOf()
             Database.followers[userAuth.uuid] = mutableSetOf()
 
@@ -75,7 +75,7 @@ class FakeRegisterDataSource: RegisterDataSource {
 
             val index = Database.usersAuth.indexOf(Database.sessionUserAuth)
             Database.usersAuth[index] = Database.sessionUserAuth!!.copy(
-                profilePhoto = uri
+                profilePhotoUrl = uri.path
             )
             Database.sessionUserAuth = Database.usersAuth[index]
 

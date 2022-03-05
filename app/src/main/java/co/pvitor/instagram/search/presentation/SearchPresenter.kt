@@ -2,6 +2,7 @@ package co.pvitor.instagram.search.presentation
 
 import android.content.Context
 import co.pvitor.instagram.R
+import co.pvitor.instagram.common.model.User
 import co.pvitor.instagram.common.model.UserAuth
 import co.pvitor.instagram.common.util.RequestCallback
 import co.pvitor.instagram.search.Search
@@ -18,8 +19,8 @@ class SearchPresenter(
 
         view.showProgress(true)
 
-        repository.fetchUsers(search, object: RequestCallback<List<UserAuth>> {
-            override fun onSuccess(response: List<UserAuth>) {
+        repository.fetchUsers(search, object: RequestCallback<List<User>> {
+            override fun onSuccess(response: List<User>) {
                 if(response.isNotEmpty()) {
                     view.displayUsersList(response)
                 } else {

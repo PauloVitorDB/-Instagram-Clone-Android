@@ -3,6 +3,7 @@ package co.pvitor.instagram.search
 import androidx.annotation.StringRes
 import co.pvitor.instagram.common.base.BasePresenter
 import co.pvitor.instagram.common.base.BaseView
+import co.pvitor.instagram.common.model.User
 import co.pvitor.instagram.common.model.UserAuth
 
 interface Search {
@@ -14,7 +15,7 @@ interface Search {
     interface View: BaseView<Presenter> {
         fun showProgress(enabled: Boolean)
         fun displayRequestFailure(@StringRes message: Int?)
-        fun displayUsersList(users: List<UserAuth>)
+        fun displayUsersList(users: List<User>)
         fun displayEmptyUsersList()
     }
 

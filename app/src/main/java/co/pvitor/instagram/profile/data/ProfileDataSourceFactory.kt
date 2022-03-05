@@ -2,10 +2,10 @@ package co.pvitor.instagram.profile.data
 
 import co.pvitor.instagram.common.model.LocalCache
 import co.pvitor.instagram.common.model.Post
-import co.pvitor.instagram.common.model.UserAuth
+import co.pvitor.instagram.common.model.User
 
 class ProfileDataSourceFactory(
-    private val profileCache: LocalCache<Pair<UserAuth, Boolean?>>,
+    private val profileCache: LocalCache<Pair<User, Boolean?>>,
     private val postsCache: LocalCache<List<Post>>
 ) {
 
@@ -14,7 +14,7 @@ class ProfileDataSourceFactory(
     }
 
     fun createRemoteDataSource() : ProfileDataSource {
-        return ProfileFakeDataSource()
+        return FireProfileDataSource()
     }
 
     fun createFromUser(uuid: String?): ProfileDataSource {

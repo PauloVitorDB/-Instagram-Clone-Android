@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView
 import co.pvitor.instagram.R
 import co.pvitor.instagram.common.base.BaseFragment
 import co.pvitor.instagram.common.base.DependencyInjector
+import co.pvitor.instagram.common.model.User
 import co.pvitor.instagram.common.model.UserAuth
 import co.pvitor.instagram.databinding.FragmentSearchBinding
 import co.pvitor.instagram.search.Search
@@ -89,7 +90,7 @@ class SearchFragment: BaseFragment<Search.Presenter, FragmentSearchBinding>(
         binding.textViewSearchNotFound.visibility = View.VISIBLE
     }
 
-    override fun displayUsersList(users: List<UserAuth>) {
+    override fun displayUsersList(users: List<User>) {
         binding.textViewSearchNotFound.visibility = View.GONE
         binding.recyclerViewSearch.visibility = View.VISIBLE
         searchAdapter.userList = users
