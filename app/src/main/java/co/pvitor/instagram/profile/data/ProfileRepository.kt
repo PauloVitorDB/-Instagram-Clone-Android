@@ -89,4 +89,7 @@ class ProfileRepository(
 
     }
 
+    fun logout() {
+        profileDataSourceFactory.createRemoteDataSource().logout()
+    }
 }

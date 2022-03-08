@@ -78,4 +78,5 @@
     <string name="error_update_photo">Não foi possível atulizar a foto de perfil</string>
     <string name="invalid_login">Não foi possível fazer o login</string>
     <string name="error_loading_posts">Nao foi possivel buscar os posts</string>
+    <string name="logout">Sair</string>
 </resources>

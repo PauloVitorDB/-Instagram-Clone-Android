@@ -17,7 +17,7 @@ import co.pvitor.instagram.register.data.FireRegisterDataSource
 import co.pvitor.instagram.register.data.RegisterDataSource
 import co.pvitor.instagram.register.data.RegisterRepository
 import co.pvitor.instagram.search.data.SearchDataSource
-import co.pvitor.instagram.search.data.SearchRemoteDataSource
+import co.pvitor.instagram.search.data.FireSearchDataSource
 import co.pvitor.instagram.search.data.SearchRepository
 import co.pvitor.instagram.splash.data.FireSplashDataSource
 import co.pvitor.instagram.splash.data.SplashDataSource
@@ -61,7 +61,7 @@ object DependencyInjector {
     }
 
     fun searchRepository(): SearchRepository {
-        val dataSource: SearchDataSource = SearchRemoteDataSource()
+        val dataSource: SearchDataSource = FireSearchDataSource()
         return SearchRepository(dataSource)
     }
 

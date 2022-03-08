@@ -7,6 +7,7 @@ import co.pvitor.instagram.common.util.RequestCallback
 interface HomeDataSource {
 
     fun fetchPosts(uuid: String, callback: RequestCallback<List<Post>>)
+    fun logout() { throw UnsupportedOperationException() }
 
     fun fetchSession(): User { throw UnsupportedOperationException() }
     fun putFeedList(data: List<Post>?) { throw UnsupportedOperationException() }

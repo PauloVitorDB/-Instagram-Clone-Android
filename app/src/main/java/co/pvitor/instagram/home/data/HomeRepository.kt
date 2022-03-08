@@ -38,4 +38,8 @@ class HomeRepository(
         localDataSource.putFeedList(null)
     }
 
+    fun logout() {
+        dataSourceFactory.createRemoteDataSource().logout()
+    }
+
 }

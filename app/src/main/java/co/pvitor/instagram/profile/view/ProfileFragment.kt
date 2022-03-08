@@ -1,5 +1,6 @@
 package co.pvitor.instagram.profile.view
 
+import android.content.Context
 import android.util.Log
 import android.view.*
 import androidx.recyclerview.widget.GridLayoutManager
@@ -11,6 +12,7 @@ import co.pvitor.instagram.common.model.User
 import co.pvitor.instagram.common.view.BottomSheetItem
 import co.pvitor.instagram.common.view.ModalBottomSheetDialog
 import co.pvitor.instagram.databinding.FragmentProfileBinding
+import co.pvitor.instagram.main.LogoutListener
 import co.pvitor.instagram.profile.Profile
 import co.pvitor.instagram.profile.presentation.ProfilePresenter
 import com.google.android.material.snackbar.Snackbar
@@ -33,6 +35,19 @@ class ProfileFragment: BaseFragment<Profile.Presenter, FragmentProfileBinding>(
 
     private val rvPostAdapter = PostGridAdapter()
 
+    private lateinit var logoutListener: LogoutListener
+    private lateinit var followListener: Profile.FollowListener
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        logoutListener = context as LogoutListener
+        followListener = context as Profile.FollowListener
+    }
+
+    override fun followUpdated() {
+        followListener.followUpdated()
+    }
+
     override fun setupPresenter() {
         presenter = ProfilePresenter(this, DependencyInjector.profileRepository())
     }
@@ -48,14 +63,13 @@ class ProfileFragment: BaseFragment<Profile.Presenter, FragmentProfileBinding>(
 
         modalBottomSheetDialog = ModalBottomSheetDialog()
         modalBottomSheetDialog.addItems(
-            BottomSheetItem(
-                R.string.config,
-                R.drawable.ic_baseline_settings_24
-            )
+            BottomSheetItem(R.string.config, R.drawable.ic_baseline_settings_24),
+            BottomSheetItem(R.string.logout, null)
         ) {
 
             when(it.id) {
                 R.string.config -> Log.d("BottomSheet", "config")
+                R.string.logout -> logoutListener.logout()
             }
 
             modalBottomSheetDialog.dismiss()

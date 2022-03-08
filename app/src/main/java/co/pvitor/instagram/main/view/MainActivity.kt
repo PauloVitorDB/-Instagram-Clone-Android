@@ -1,5 +1,6 @@
 package co.pvitor.instagram.main.view
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
@@ -12,16 +13,21 @@ import co.pvitor.instagram.post.view.AddFragment
 import co.pvitor.instagram.common.extensions.replaceFragment
 import co.pvitor.instagram.databinding.ActivityMainBinding
 import co.pvitor.instagram.home.view.HomeFragment
+import co.pvitor.instagram.main.LogoutListener
+import co.pvitor.instagram.profile.Profile
 import co.pvitor.instagram.profile.view.ProfileFragment
 import co.pvitor.instagram.search.Search
 import co.pvitor.instagram.search.view.SearchFragment
+import co.pvitor.instagram.splash.view.SplashActivity
 import com.google.android.material.appbar.AppBarLayout
 import com.google.android.material.navigation.NavigationBarView
 
 class MainActivity: AppCompatActivity(),
     NavigationBarView.OnItemSelectedListener,
     Add.ResultListener,
-    Search.SearchListener
+    Search.SearchListener,
+    LogoutListener,
+    Profile.FollowListener
 {
 
     private lateinit var binding: ActivityMainBinding
@@ -127,6 +133,7 @@ class MainActivity: AppCompatActivity(),
 
 
     override fun toProfile(uuid: String) {
+
         val fragment = ProfileFragment()
         fragment.apply {
             arguments = Bundle().apply {
@@ -139,5 +146,21 @@ class MainActivity: AppCompatActivity(),
             addToBackStack(null)
             commit()
         }
+    }
+
+    override fun followUpdated() {
+        homeFragment.presenter.clear ()
+        if(supportFragmentManager.findFragmentByTag(profileFragment.javaClass.simpleName) != null) {
+            profileFragment.presenter.clear()
+        }
+    }
+
+    override fun logout() {
+        profileFragment.presenter.logout()
+        homeFragment.presenter.clear()
+        val intent = Intent(this, SplashActivity::class.java)
+        intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
+        startActivity(intent)
+        overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out)
     }
 }

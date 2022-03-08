@@ -63,6 +63,10 @@ class ProfilePresenter(
         uuid?.let {
             repository.followUser(uuid, follow, object: RequestCallback<Boolean> {
                 override fun onSuccess(response: Boolean) {
+                    fetchProfilePosts(uuid)
+                    if(response) {
+                        view.followUpdated()
+                    }
                 }
 
                 override fun onFailure() {
@@ -73,6 +77,10 @@ class ProfilePresenter(
 
             })
         }
+    }
+
+    override fun logout() {
+        repository.logout()
     }
 
     override fun onDestroy() {
